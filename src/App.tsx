@@ -18,10 +18,7 @@ function App() {
       <section className="hero-card" aria-live="polite">
         <p className="offline-kicker">Familientreffen 2027</p>
         <h1>Feuerkuppe Varianten & Kostenuebersicht</h1>
-        <p>
-          Alle Namen in dieser Planung sind anonymisiert. Die Uebersicht zeigt
-          die Belegung und Kostenschaetzung je Unterkunftsvariante.
-        </p>
+        <p>Die Uebersicht zeigt die Belegung und Kostenschaetzung je Unterkunftsvariante.</p>
       </section>
 
       <section className="meta-card" aria-labelledby="grundlagen-heading">
