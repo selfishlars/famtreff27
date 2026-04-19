@@ -233,6 +233,7 @@ function App() {
                         <th>Kind 3+</th>
                         <th>Kind 0-3</th>
                         <th>VP-Anteil</th>
+                        <th>Unterkunftskosten</th>
                         <th>Gesamt</th>
                       </tr>
                     </thead>
@@ -244,6 +245,7 @@ function App() {
                           <td>{family.children}</td>
                           <td>{family.babies}</td>
                           <td>{eur(family.vp)}</td>
+                          <td>{eur(family.total - family.vp)}</td>
                           <td>{eur(family.total)}</td>
                         </tr>
                       ))}
