@@ -11,6 +11,8 @@ import {
 import { eur, getVariantCosts } from './utils/costs'
 
 function App() {
+  const visibleVariants = FEUERKUPPE_VARIANTS.filter((variant) => variant.id === '4')
+
   return (
     <main className="page-wrap">
       <section className="hero-card" aria-live="polite">
@@ -45,7 +47,7 @@ function App() {
         </div>
       </section>
 
-      {FEUERKUPPE_VARIANTS.map((variant) => {
+      {visibleVariants.map((variant) => {
         const costs = getVariantCosts(variant.bungalowCost)
 
         return (
