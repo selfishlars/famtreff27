@@ -1,6 +1,8 @@
 import {
+  ADULT_ALLOCATION_WEIGHT,
   ADULT_COUNT,
   BABY_COUNT,
+  CHILD_ALLOCATION_WEIGHT,
   CHILD_COUNT,
   FEUERKUPPE_VARIANTS,
   OVERNIGHT_ALLOCATION_UNITS,
@@ -63,6 +65,82 @@ function App() {
                 <p className="sum">Gesamt: {eur(costs.total)}</p>
               </div>
             </header>
+
+            <div className="table-wrap">
+              <table>
+                <caption>Kostenkalkulation (Herleitung)</caption>
+                <thead>
+                  <tr>
+                    <th>Baustein</th>
+                    <th>Berechnung</th>
+                    <th>Wert</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Gewichtung Erwachsene</td>
+                    <td>Fixwert je erwachsene Person</td>
+                    <td>{ADULT_ALLOCATION_WEIGHT.toLocaleString('de-DE')}</td>
+                  </tr>
+                  <tr>
+                    <td>Gewichtung Kinder (3+ und 0-3)</td>
+                    <td>Fixwert je Kind</td>
+                    <td>{CHILD_ALLOCATION_WEIGHT.toLocaleString('de-DE')}</td>
+                  </tr>
+                  <tr>
+                    <td>Umlageeinheiten gesamt</td>
+                    <td>
+                      ({ADULT_COUNT} × {ADULT_ALLOCATION_WEIGHT}) + ({CHILD_COUNT} + {BABY_COUNT}) ×{' '}
+                      {CHILD_ALLOCATION_WEIGHT}
+                    </td>
+                    <td>{OVERNIGHT_ALLOCATION_UNITS.toLocaleString('de-DE')}</td>
+                  </tr>
+                  <tr>
+                    <td>Bungalow-Umlage je Einheit</td>
+                    <td>{eur(variant.bungalowCost)} / {OVERNIGHT_ALLOCATION_UNITS}</td>
+                    <td>{eur(costs.overnightSharePerUnit)}</td>
+                  </tr>
+                  <tr>
+                    <td>Uebernachtungsanteil Erwachsene</td>
+                    <td>{eur(costs.overnightSharePerUnit)} × {ADULT_ALLOCATION_WEIGHT}</td>
+                    <td>{eur(costs.adultOvernight)}</td>
+                  </tr>
+                  <tr>
+                    <td>Uebernachtungsanteil Kind</td>
+                    <td>{eur(costs.overnightSharePerUnit)} × {CHILD_ALLOCATION_WEIGHT}</td>
+                    <td>{eur(costs.childOvernight)}</td>
+                  </tr>
+                  <tr>
+                    <td>Preis pro Erwachsener</td>
+                    <td>{eur(costs.adultOvernight)} + {eur(VP_ADULT)}</td>
+                    <td>{eur(costs.adultPrice)}</td>
+                  </tr>
+                  <tr>
+                    <td>Preis pro Kind (3+)</td>
+                    <td>{eur(costs.childOvernight)} + {eur(VP_CHILD)}</td>
+                    <td>{eur(costs.childPrice)}</td>
+                  </tr>
+                  <tr>
+                    <td>Preis pro Kind (0-3)</td>
+                    <td>{eur(costs.childOvernight)} + {eur(VP_BABY)}</td>
+                    <td>{eur(costs.child03Price)}</td>
+                  </tr>
+                  <tr>
+                    <td>VP gesamt</td>
+                    <td>
+                      ({ADULT_COUNT} × {eur(VP_ADULT)}) + ({CHILD_COUNT} × {eur(VP_CHILD)}) + ({BABY_COUNT} ×{' '}
+                      {eur(VP_BABY)})
+                    </td>
+                    <td>{eur(costs.vpTotal)}</td>
+                  </tr>
+                  <tr>
+                    <td>Gesamtkosten Variante</td>
+                    <td>{eur(variant.bungalowCost)} + {eur(costs.vpTotal)}</td>
+                    <td>{eur(costs.total)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <div className="table-wrap">
               <table>
