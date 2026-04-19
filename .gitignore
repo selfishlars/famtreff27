@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Vite
+*.local
+.vite/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Planungsdokumente (privat – bleiben nur lokal)
+# Enthalten Namen, Alter, Adressen, persönliche Informationen
+MEMORY.md
+BACKLOG.md
+HISTORY-LOG.md
+CLAUDE.md
+GEMINI.md
+AGENTS.md
+MCP-INFOS.md
+"Interessante Projektinfos.md"
+Interessante\ Projektinfos.md
+chatverlauf/
+unterkuenfte/
+recherchen/
