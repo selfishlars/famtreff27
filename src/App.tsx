@@ -42,8 +42,8 @@ function App() {
 
   const scenarios: Scenario[] = [
     {
-      id: '4',
-      title: 'Variante 4',
+      id: '4_1',
+      title: 'Variante 4_1',
       description: 'Standardmodell: Erwachsene und Kinder mit gleicher Gewichtung (1.0).',
       mode: 'person-weighted',
       adultWeight: 1,
