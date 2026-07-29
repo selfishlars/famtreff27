@@ -1,39 +1,58 @@
 # Projekt-Memory: famtreff27
 
-Stand: 2026-04-19
+Stand: 2026-07-29
+
+> **WICHTIG: Diese Datei muss bei jeder relevanten Aenderung am Projekt aktuell gehalten werden.**
+> Sobald sich Produktzustand, Datenmodell, Kostenlogik oder UI-Umfang aendern, ist dieser Stand
+> im selben Arbeitsschritt zu aktualisieren (nicht erst bei der naechsten Nachfrage). Eine veraltete
+> Memory.md ist schlimmer als keine, weil sie falsche Annahmen ueber den Projektzustand erzeugt.
 
 ## Kurzstatus
 
-- Die Web-App ist aktuell absichtlich im Offline-Modus.
-- Die Live-Inhalte zur Familienplanung sind aus der sichtbaren UI entfernt.
-- Der zuletzt eingecheckte Stand ist auf `main` identisch mit `origin/main`.
+- Die Web-App ist aktiv und zeigt die volle Planungs- und Kostenuebersicht fuer **Variante 4**
+  ("Familientreffen 2027", Feuerkuppe).
+- Der zuletzt eingecheckte Stand ist auf `main` identisch mit `origin/main`, Arbeitsverzeichnis clean.
 
 ## Aktueller Produktzustand
 
-- Startseite zeigt nur eine Offline-Karte mit Hinweistext.
-- Keine sichtbare Navigation, keine Variantenanzeige, keine Kostenansicht.
-- Styling ist reduziert, aber weiterhin mit bestehendem Farb-/Typografie-Setup aktiv.
+- Startseite (`src/App.tsx`) zeigt ausschliesslich Variante 4 mit fuenf Kostenszenarien:
+  - `4_1`: personengewichtet, Erwachsene/Kinder gleich gewichtet (1.0/1.0)
+  - `4_2`: personengewichtet, Bungalowkosten nur auf Erwachsene umgelegt (Kindergewicht 0)
+  - `4_3`: personengewichtet, Kinder mit Gewicht 0.5
+  - `5_0`: lineare Zimmer-Umlage (jedes Zimmer gleicher Kostenanteil)
+  - `5_1`: Zimmeranteil je Haus nach Schlafplaetzen (Hausanteil × Zimmerbetten/Hausbetten)
+- Pro Szenario werden Herleitungstabelle, Familien-Kostentabelle (inkl. Spalte
+  "Unterkunftskosten", seit Commit `b22a8e5`) und Zimmerbelegungstabelle gerendert.
+- Keine Navigation/Routing sichtbar, obwohl `react-router-dom` als Dependency vorhanden ist (derzeit
+  ungenutzt bzw. fuer spaetere Erweiterung).
+- Styling: `src/index.css`, reduziertes/eigenes Farb-/Typografie-Setup.
 
 ## Technischer Stand
 
-- Stack: React 18 + TypeScript + Vite 6.
-- Wichtige Scripts in `package.json`: `dev`, `build`, `preview`, `lint`.
-- Entry/UI: `src/App.tsx` zeigt nur den Offline-Hinweis.
-- Basis-Styles: `src/index.css`.
+- Stack: React 18 + TypeScript + Vite 6, `react-router-dom` als Dependency (aktuell ungenutzt).
+- Scripts (`package.json`): `dev`, `build` (`tsc -b && vite build`), `preview`, `lint` (eslint).
+- Entry: `src/main.tsx` → `src/App.tsx`.
 
-## Vorhandene (derzeit nicht eingebundene) Fachlogik
+## Fachlogik / Datenmodell
 
-- Planungs- und Belegungsdaten liegen weiterhin in `src/data/feuerkuppeData.ts`.
-- Kostenlogik liegt weiterhin in `src/utils/costs.ts`.
-- Damit ist eine spaetere Reaktivierung der Planungsansicht moeglich, ohne Daten neu aufzubauen.
+- `src/data/feuerkuppeData.ts`:
+  - Personenzahlen: `ADULT_COUNT=16`, `CHILD_COUNT=6`, `BABY_COUNT=1`.
+  - VP-Kosten pro Person: Erwachsene 85,50 €, Kinder 3+ 67,50 €, Kinder 0-3 34,50 €.
+  - `FEUERKUPPE_VARIANTS`: vier Varianten (1-4) mit Haeusern/Zimmern/Belegung/Bungalowkosten.
+    Nur Variante 4 (Bungalowkosten 2754 €, 3× Kat. Ia, 9 Zimmer) wird aktuell in der UI verwendet.
+  - `FAMILY_COSTS`: 8 Familien mit Erwachsenen-/Kinder-/Baby-Anzahl (anonymisierte Namen).
+- `src/utils/costs.ts`: Kostenberechnungen fuer alle drei Modi (person-weighted, room-linear,
+  room-beds-house), inkl. `getVariantCosts`, `getWeightedVariantCosts`, `getRoomLinearCosts`,
+  `getRoomBedShareByHouseCosts`, `eur`-Formatierung.
 
 ## Hinweis zur Projektlinie
 
-- Dieses Projekt wird als eigenstaendige, neu aufgesetzte Codebasis gefuehrt.
-- Es werden nur anonymisierte Inhalte verwendet.
+- Eigenstaendige, neu aufgesetzte Codebasis; es werden nur anonymisierte Inhalte verwendet
+  (Familiennamen sind Platzhalter/Codenamen, keine echten Namen).
 
-## Offene Punkte fuer naechste Aktivierung
+## Offene Punkte
 
-- Entscheidung, wann der private Modus aufgehoben wird.
-- Festlegen, welche Daten wieder sichtbar werden duerfen (Datenschutz/Privatsphaere).
-- Optional: Reaktivierung der alten UI-Komponenten auf Basis der bestehenden Daten- und Kostenmodule.
+- Klaeren, ob/wann weitere Varianten (1-3) oder eine Navigation zwischen ihnen wieder eingebunden
+  werden sollen.
+- `react-router-dom`-Dependency ist ungenutzt — entweder fuer geplante Navigation vorsehen oder
+  entfernen, falls dauerhaft nicht gebraucht.
