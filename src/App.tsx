@@ -165,6 +165,40 @@ function App() {
         </div>
       </section>
 
+      <section className="meta-card" aria-labelledby="rap-heading">
+        <h2 id="rap-heading">Reiseausfallpauschale (RAP) – Originaltext</h2>
+        <blockquote className="muted">
+          <p>
+            "Ihr Nutzungsvertrag enthält Fristen für die Stornierung von Einzelplätzen (laut AGBs,
+            Punkt 6). Dem entsprechend werden folgende Stornierungsgebühren erhoben:
+          </p>
+          <p>
+            bis zum 90. Tag vor Reisebeginn 30% des Reisepreises<br />
+            vom 89. bis zum 11. Tag vor Reisebeginn 50% des Reisepreises<br />
+            ab dem 10. Tag vor Reisebeginn 70% des Reisepreises
+          </p>
+          <p>
+            Sie sind als Gruppenverantwortlicher dem Ferienpark Feuerkuppe gegenüber
+            zahlungspflichtig.
+          </p>
+          <p>Wir bieten Ihnen die Möglichkeit, diese Kosten zu vermeiden.</p>
+          <p>
+            Die RAP kann nur für die gesamte Gruppe inklusive Begleitpersonen abgeschlossen
+            werden und beträgt 3,00€ pro Person und pro Übernachtung.
+          </p>
+          <p>
+            Mit dieser Zahlung sind Sie von sämtlichen Stornogebühren befreit und müssen sich
+            darum nicht sorgen."
+          </p>
+        </blockquote>
+        <p className="muted">
+          Hinweis: Ob dieser Schutz auch bei der Absage einzelner Personen (statt der gesamten
+          Gruppe) greift, ist im Dokument nicht wörtlich geregelt – das ergibt sich nur aus der
+          Formulierung "gesamte Gruppe inklusive Begleitpersonen". Im Zweifel vorab beim KiEZ
+          schriftlich bestätigen lassen.
+        </p>
+      </section>
+
       {scenarios.map((scenario) => {
         const personCosts =
           scenario.mode === 'person-weighted'
