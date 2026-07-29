@@ -50,6 +50,18 @@ Stand: 2026-07-29
 - Eigenstaendige, neu aufgesetzte Codebasis; es werden nur anonymisierte Inhalte verwendet
   (Familiennamen sind Platzhalter/Codenamen, keine echten Namen).
 
+## Lokale private Dokumente (gitignored)
+
+- Lokaler Ordner mit 7 PDF-Dokumenten zur Unterkunft/Reise, **gitignored** (nicht im Repo, nur lokal
+  vorhanden). Enthaltene Dateien:
+  - Formblatt 11 Pauschalreiserecht.pdf
+  - Grillliste 2026.pdf
+  - Hausordnung.pdf
+  - Programmliste 2026 Wochenende.pdf
+  - Reiseausfallpauschale (RAP).pdf
+  - Reisebedingungen BAG KiEZ Stand 04.03.2022.pdf
+  - Vertrag_Familien.pdf
+
 ## Offene Punkte
 
 - Klaeren, ob/wann weitere Varianten (1-3) oder eine Navigation zwischen ihnen wieder eingebunden
