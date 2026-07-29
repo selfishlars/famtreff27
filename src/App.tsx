@@ -24,6 +24,49 @@ type Scenario = {
   childWeight?: number
 }
 
+type DocumentSummary = {
+  title: string
+  summary: string
+}
+
+const DOCUMENT_SUMMARIES: DocumentSummary[] = [
+  {
+    title: 'Formblatt 11 (Pauschalreiserecht)',
+    summary:
+      'EU-Standardformblatt: informiert ueber die gesetzlichen Reisendenrechte bei Pauschalreisen nach § 651a BGB.',
+  },
+  {
+    title: 'Grillliste 2026',
+    summary:
+      'Bestellformular fuer Grillangebote (Fleisch/vegetarisch/vegan, Zubehoer, Aufpreisoptionen) vor Anreise einzureichen.',
+  },
+  {
+    title: 'Hausordnung',
+    summary:
+      'Verbindliche Regeln vor Ort: An-/Abreisezeiten, Ruhezeiten, Tier-/Rauchverbot, Verhaltens- und Sicherheitsvorgaben.',
+  },
+  {
+    title: 'Programmliste 2026 (Wochenende)',
+    summary:
+      'Buchbare Freizeitangebote vor Ort (mit/ohne Betreuung) samt Preisen sowie Vorschlaege fuer externe Ausflugsziele.',
+  },
+  {
+    title: 'Reiseausfallpauschale (RAP)',
+    summary:
+      'Optionale Zusatzversicherung (3 EUR/Person/Nacht), die von allen Stornogebuehren befreit.',
+  },
+  {
+    title: 'Reisebedingungen (BAG KiEZ, Stand 04.03.2022)',
+    summary:
+      'Allgemeine Reise- und Buchungsbedingungen: Vertragsschluss, Zahlung, Ruecktritt/Kuendigung, Haftung, Gerichtsstand.',
+  },
+  {
+    title: 'Vertrag Familien (Leistungsvertrag)',
+    summary:
+      'Unser konkreter Buchungsvertrag: Termin 06.–09.05.2027, 23 Personen, 3× Bungalow Kat. Ia, Verpflegungspauschalen je Personengruppe.',
+  },
+]
+
 function App() {
   const variant = FEUERKUPPE_VARIANTS.find((item) => item.id === '4')
 
@@ -107,6 +150,18 @@ function App() {
               <li>Kinder (0-3): {eur(VP_BABY)}</li>
             </ul>
           </article>
+        </div>
+      </section>
+
+      <section className="meta-card" aria-labelledby="dokumente-heading">
+        <h2 id="dokumente-heading">Wichtige Dokumente & Bedingungen</h2>
+        <div className="meta-grid">
+          {DOCUMENT_SUMMARIES.map((doc) => (
+            <article key={doc.title}>
+              <h3>{doc.title}</h3>
+              <p className="muted">{doc.summary}</p>
+            </article>
+          ))}
         </div>
       </section>
 

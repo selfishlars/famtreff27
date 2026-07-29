@@ -49,6 +49,9 @@ Stand: 2026-07-29
 
 - Eigenstaendige, neu aufgesetzte Codebasis; es werden nur anonymisierte Inhalte verwendet
   (Familiennamen sind Platzhalter/Codenamen, keine echten Namen).
+- Der Klarname "Feuerkuppe" (Unterkunft/Ferienpark) ist bereits auf der oeffentlichen Webseite
+  sichtbar (`src/App.tsx`, Hauptueberschrift) und darf dort sowie in weiteren Inhalten verwendet
+  werden. Echte Personendaten (Namen, Adressen von Buchungspartnern etc.) bleiben weiterhin tabu.
 
 ## Lokale private Dokumente (gitignored)
 
