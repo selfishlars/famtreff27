@@ -30,11 +30,14 @@ Stand: 2026-08-01
   Feld `linen` je Familie in `FAMILY_COSTS` (= Anzahl Personen mit Wunsch). Aktuell: ElectricalResistance 4,
   Sonntagskind 2, Molinero E/J 2 -> 8 Personen = **60 EUR**. Als eigene Spalte + Summenzeile gefuehrt,
   im jeweiligen Gesamt enthalten.
-- Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
+- **Festraum (Gemeinschaftsraum ~80 qm):** gebucht 100 EUR/Tag × 2 Tage (Fr + Sa) = **200 EUR**.
+  Gemeinschaftskosten, verteilt **wie die Bungalow-Umlage** (Erw. 1 / Kinder 0,5, 18,5 Einheiten
+  -> ~10,81 EUR/Erw., ~5,41 EUR/Kind). Eigene Spalte + Summenzeile, im Gesamt enthalten.
+- Technisch: Gewichtung betrifft die Bungalow-Umlage **und** den Festraum (`ADULT_ALLOCATION_WEIGHT=1`,
   `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
   VP, RAP und Bettwaesche werden immer personengenau addiert.
-- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 + Bettwaesche 60 (optional)
-  = **4.701,00 €**. (15 Erwachsene / 5 Kinder 4+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis fix.)
+- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 + Bettwaesche 60 + Festraum 200
+  = **4.901,00 €**. (15 Erwachsene / 5 Kinder 4+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis fix.)
 
 ## Aktueller Produktzustand
 
@@ -45,7 +48,7 @@ Stand: 2026-08-01
 - Sektionen: Planungsgrundlage (Personen, VP-Tarife, Gewichtungs-Uebersicht), Dokumente,
   Reiseausfallpauschale (Originaltext + Kosten-/Berechnungstabelle), und die Kostenaufteilung mit
   Herleitungstabelle, Familien-Kostentabelle (Spalten "VP-Anteil", "Unterkunftskosten",
-  "RAP-Anteil", "Bettwäsche", "Gesamt") und Zimmerbelegungstabelle.
+  "RAP-Anteil", "Bettwäsche", "Festraum", "Gesamt") und Zimmerbelegungstabelle.
 - RAP: 3 EUR/Person/Nacht × 3 Naechte = 9 EUR/Person; 22 Personen = 198 EUR gesamt.
 - Keine Navigation/Routing sichtbar, obwohl `react-router-dom` als Dependency vorhanden ist (derzeit
   ungenutzt bzw. fuer spaetere Erweiterung).
@@ -72,6 +75,8 @@ Stand: 2026-08-01
     `TOTAL_PERSONS=22`, `RAP_TOTAL=198`.
   - Bettwaesche: `LINEN_PER_PERSON=7.5`; optionales Feld `linen?` je `FamilyCost` (Personen mit Wunsch).
     `getWeightedPlanCosts` liefert je Familie zusaetzlich `linen` (EUR) und gesamt `linenTotal`.
+  - Festraum: `FESTRAUM_PER_DAY=100`, `FESTRAUM_DAYS=2`, `FESTRAUM_TOTAL=200`. `getWeightedPlanCosts`
+    liefert je Familie `festraum` (EUR) sowie `festraumTotal`/`festraumSharePerUnit` (Umlage wie Bungalow).
   - `FEUERKUPPE_PLAN` (Typ `AccommodationPlan`): **ein** Objekt fuer die gebuchte Unterkunft
     (Bungalowkosten 2754 €, 3× Kat. Ia, 9 Zimmer). Kein `id`/`title`, kein "Varianten"-Konzept mehr.
     Frueher `FEUERKUPPE_VARIANTS`-Array (Varianten 1-3 am 2026-08-01 entfernt, dann auf Einzelobjekt
@@ -109,10 +114,24 @@ Stand: 2026-08-01
   Verpflegung HP/Nacht -> **VP-Pauschale pro Person** (85,50/67,50/34,50 €), Bettwaesche 6 -> 7,50 €.
 - RAP (Reiseausfallpauschale) ist laut Rezeption ein offizielles Angebot ab 2026.
 - Frist: Unterlagen inkl. Programmwuensche innerhalb 4 Wochen (ab 01.08.2026) zuruecksenden.
+- **Verpflegungszeitraum (vorlaeufig, noch mit Ferienpark zu klaeren):** erste Mahlzeit
+  Donnerstag Mittagessen, letzte Mahlzeit Sonntag Fruehstueck. Auf der Website unter
+  "Planungsgrundlage" vermerkt.
 - **Revidiertes Angebot/Vertrag fuer 22 Personen angefordert:** Junior Blizzard N sagt bereits vor
   Vertragsabschluss ab. Da noch kein Vertrag geschlossen ist, wird direkt ein Vertrag ueber 22
   Personen verlangt (statt 23) -> keine nachtraegliche Teilnehmerreduzierung/Storno noetig. Website
   rechnet bereits mit 22; Doku-Kachel "Vertrag Familien" entsprechend angepasst.
+
+## Gemeinschaftsraeume / Raeumlichkeiten (Feuerkuppe)
+
+- Quelle: `ferienpark-feuerkuppe.de/unser-kiez/raeumlichkeiten`. Preise pro Tag, ausserhalb der
+  Pauschalen; wir zahlen **Privat**-Tarife (Familienfreizeit, kein Verein). *=eigene Kueche (+30 EUR/Tag).
+  - Speisesaal mit Buehne (~500 qm): 100 EUR/Abteil (Privat) – Essen laeuft ohnehin hierueber (VP).
+  - Workscheune* (~280 qm): 150 EUR – **unbeheizt**.
+  - Mehrzweckhalle* (~250 qm): 150 EUR – Feiern/Disco/Seminare.
+  - Kleinkunstbuehne (99 Pers.): 20 EUR 1. Std, dann 10 EUR/Std – Kinobestuhlung + Technik.
+  - Festraum* (~80 qm): 100 EUR/Tag – unterteilbar, eigene Kueche.
+- **Gebucht: Festraum ~80 qm, Fr + Sa (2 Tage) = 200 EUR** (siehe Kostenmodell).
 
 ## Offene Punkte
 

@@ -5,6 +5,8 @@ import {
   CHILD_ALLOCATION_WEIGHT,
   CHILD_COUNT,
   FEUERKUPPE_PLAN,
+  FESTRAUM_DAYS,
+  FESTRAUM_PER_DAY,
   LINEN_PER_PERSON,
   NIGHTS,
   RAP_PER_PERSON,
@@ -128,6 +130,14 @@ function App() {
               <li>RAP: voll pro Person (auch 0-3)</li>
             </ul>
           </article>
+          <article>
+            <h3>Verpflegungszeitraum</h3>
+            <ul>
+              <li>Erste Mahlzeit: Donnerstag, Mittagessen</li>
+              <li>Letzte Mahlzeit: Sonntag, Frühstück</li>
+            </ul>
+            <p className="muted">Vorläufig – noch mit dem Ferienpark zu klären.</p>
+          </article>
         </div>
       </section>
 
@@ -239,6 +249,7 @@ function App() {
             <p>VP gesamt: {eur(costs.vpTotal)}</p>
             <p>RAP gesamt: {eur(costs.rapTotal)}</p>
             <p>Bettwäsche gesamt: {eur(costs.linenTotal)}</p>
+            <p>Festraum gesamt: {eur(costs.festraumTotal)}</p>
             <p className="sum">Gesamt: {eur(costs.total)}</p>
           </div>
         </header>
@@ -321,10 +332,20 @@ function App() {
                 <td>{eur(costs.linenTotal)}</td>
               </tr>
               <tr>
+                <td>Festraum gesamt</td>
+                <td>{eur(FESTRAUM_PER_DAY)} × {FESTRAUM_DAYS} Tage (Fr + Sa), verteilt wie Umlage</td>
+                <td>{eur(costs.festraumTotal)}</td>
+              </tr>
+              <tr>
+                <td>Festraum-Umlage je Einheit</td>
+                <td>{eur(costs.festraumTotal)} / {costs.overnightAllocationUnits.toLocaleString('de-DE')}</td>
+                <td>{eur(costs.festraumSharePerUnit)}</td>
+              </tr>
+              <tr>
                 <td>Gesamtkosten</td>
                 <td>
                   {eur(plan.bungalowCost)} + {eur(costs.vpTotal)} + {eur(costs.rapTotal)} +{' '}
-                  {eur(costs.linenTotal)}
+                  {eur(costs.linenTotal)} + {eur(costs.festraumTotal)}
                 </td>
                 <td>{eur(costs.total)}</td>
               </tr>
@@ -345,6 +366,7 @@ function App() {
                 <th>Unterkunftskosten</th>
                 <th>RAP-Anteil</th>
                 <th>Bettwäsche</th>
+                <th>Festraum</th>
                 <th>Gesamt</th>
               </tr>
             </thead>
@@ -359,6 +381,7 @@ function App() {
                   <td>{eur(family.lodging)}</td>
                   <td>{eur(family.rap)}</td>
                   <td>{family.linen > 0 ? eur(family.linen) : '–'}</td>
+                  <td>{eur(family.festraum)}</td>
                   <td>{eur(family.total)}</td>
                 </tr>
               ))}
@@ -368,6 +391,11 @@ function App() {
         <p className="muted">
           Bettwäsche ist optional ({eur(LINEN_PER_PERSON)} pro Person, Vertrag 2027) und wird nur den
           Familien berechnet, die sie wünschen; der Anteil ist im jeweiligen Gesamt enthalten.
+        </p>
+        <p className="muted">
+          Festraum (~80 m²): {eur(FESTRAUM_PER_DAY)}/Tag für {FESTRAUM_DAYS} Tage (Freitag + Samstag)
+          = {eur(costs.festraumTotal)}. Als Gemeinschaftskosten wie die Unterkunfts-Umlage gewichtet
+          (Erwachsene 1 / Kinder 0,5) auf alle Familien verteilt.
         </p>
 
         <div className="table-wrap">

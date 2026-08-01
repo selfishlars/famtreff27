@@ -51,6 +51,12 @@ export const RAP_PER_PERSON_PER_NIGHT = 3
 export const RAP_PER_PERSON = RAP_PER_PERSON_PER_NIGHT * NIGHTS
 export const RAP_TOTAL = TOTAL_PERSONS * RAP_PER_PERSON
 
+// Festraum (Gemeinschaftsraum ~80 qm): 100 EUR/Tag, gebucht Freitag + Samstag = 2 Tage.
+// Gemeinschaftskosten, verteilt wie die Bungalow-Umlage (Erwachsene 1 / Kinder 0,5).
+export const FESTRAUM_PER_DAY = 100
+export const FESTRAUM_DAYS = 2
+export const FESTRAUM_TOTAL = FESTRAUM_PER_DAY * FESTRAUM_DAYS
+
 export const FAMILY_COSTS: FamilyCost[] = [
   { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0, linen: 2 },
   { family: 'Senior Blizzard J/U', adults: 2, children: 0, babies: 0 },
