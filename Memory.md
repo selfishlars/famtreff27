@@ -10,8 +10,10 @@ Stand: 2026-08-01
 ## Kurzstatus
 
 - Die Web-App ist aktiv und zeigt die volle Planungs- und Kostenuebersicht fuer **Variante 4**
-  ("Familientreffen 2027", Feuerkuppe).
-- Der zuletzt eingecheckte Stand ist auf `main` identisch mit `origin/main`, Arbeitsverzeichnis clean.
+  ("Familientreffen 2027", Feuerkuppe), inkl. Reiseausfallpauschale (RAP) je Familie.
+- Letzter Feature-Stand committet + gepusht am 2026-08-01 (Commit `88b4fae`): RAP erfasst,
+  Varianten 1-3 entfernt, VP-Werte durch korrigierten Vertrag 2027 bestaetigt. GitHub-Pages-Deploy
+  laeuft automatisch bei Push auf `main`.
 
 ## Kostenaufteilungs-Festlegung (Familie, verbindlich)
 
