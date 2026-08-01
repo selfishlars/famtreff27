@@ -27,8 +27,11 @@ export type FamilyCost = {
 export const ADULT_COUNT = 16
 export const CHILD_COUNT = 6
 export const BABY_COUNT = 1
+// Vereinbarte Kostenaufteilung (Familien-Planungsabsprache): Erwachsene tragen die
+// Unterkunfts-Umlage mit Gewicht 1, Kinder (unabhaengig vom Alter, auch 0-3) mit 0,5.
+// Betrifft NUR die Bungalow-Umlage; VP und RAP werden immer personengenau abgerechnet.
 export const ADULT_ALLOCATION_WEIGHT = 1
-export const CHILD_ALLOCATION_WEIGHT = 1
+export const CHILD_ALLOCATION_WEIGHT = 0.5
 export const OVERNIGHT_ALLOCATION_UNITS =
   ADULT_COUNT * ADULT_ALLOCATION_WEIGHT +
   (CHILD_COUNT + BABY_COUNT) * CHILD_ALLOCATION_WEIGHT

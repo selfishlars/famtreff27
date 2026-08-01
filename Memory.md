@@ -9,35 +9,37 @@ Stand: 2026-08-01
 
 ## Kurzstatus
 
-- Die Web-App ist aktiv und zeigt die volle Planungs- und Kostenuebersicht fuer **Variante 4**
-  ("Familientreffen 2027", Feuerkuppe), inkl. Reiseausfallpauschale (RAP) je Familie.
-- Letzter Feature-Stand committet + gepusht am 2026-08-01 (Commit `88b4fae`): RAP erfasst,
-  Varianten 1-3 entfernt, VP-Werte durch korrigierten Vertrag 2027 bestaetigt. GitHub-Pages-Deploy
-  laeuft automatisch bei Push auf `main`.
+- Die Web-App ist aktiv und zeigt **ein** verbindliches Pricing-Modell "Vereinbarte
+  Kostenaufteilung" fuer **Variante 4** ("Familientreffen 2027", Feuerkuppe), inkl. RAP je Familie.
+- Verlauf 2026-08-01: RAP erfasst + Varianten 1-3 entfernt (Commit `88b4fae`), danach auf das
+  vereinbarte Gewichtungsmodell (Erw. 1 / Kinder 0,5) konsolidiert und die Vergleichs-Szenarien
+  entfernt. VP-Werte durch korrigierten Vertrag 2027 bestaetigt. GitHub-Pages-Deploy laeuft
+  automatisch bei Push auf `main`.
 
-## Kostenaufteilungs-Festlegung (Familie, verbindlich)
+## Kostenaufteilungs-Festlegung (Familie, verbindlich – Planungsabsprache)
 
-- **Innerhalb der Familie vereinbart:** Bei der **Unterkunfts-Umlage** zahlen **Kinder weniger**
-  als Erwachsene (reduzierte Umlage-Gewichtung). Das ist bewusst so festgelegt.
-- **VP/HP-Kosten** dagegen zahlt **jede Person exakt ihre tatsaechlichen Kosten** – hier gibt es
-  **keinen** familieninternen Kostensplit / keine Gewichtung.
-- **RAP** (Reiseausfallpauschale) wird ebenfalls exakt pro Kopf getragen (3 EUR/Person/Nacht,
-  auch Kinder/Babys), kein Split.
-- Technisch: Die Gewichtung betrifft nur die Bungalow-Umlage (`adultWeight`/`childWeight` in
-  `getWeightedVariantCosts`); VP und RAP werden immer personengenau addiert.
+- **Unterkunfts-Umlage (Bungalow):** Erwachsene Gewicht **1,0**, **alle Kinder 0,5** – unabhaengig
+  vom Alter (auch Kinder 0-3). Kinder sind alle unter 10 Jahren, es wird nicht feiner aufgeteilt.
+  -> Umlageeinheiten = 16×1 + 7×0,5 = **19,5**; Bungalow-Umlage je Einheit = 2754/19,5 = 141,23 €.
+- **VP-Kosten:** **jede Person exakt** ihren Tarif (Erw. 85,50 / Kind 3+ 67,50 / Kind 0-3 34,50 €),
+  **kein** Split, keine Gewichtung.
+- **RAP:** exakt pro Kopf, **voll** auch fuer Kinder 0-3 (9 EUR/Person), kein Split.
+- Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
+  `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedVariantCosts`);
+  VP und RAP werden immer personengenau addiert.
+- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1807,50 + RAP 207 = **4.768,50 €**.
 
 ## Aktueller Produktzustand
 
-- Startseite (`src/App.tsx`) zeigt ausschliesslich Variante 4 mit fuenf Kostenszenarien:
-  - `4_1`: personengewichtet, Erwachsene/Kinder gleich gewichtet (1.0/1.0)
-  - `4_2`: personengewichtet, Bungalowkosten nur auf Erwachsene umgelegt (Kindergewicht 0)
-  - `4_3`: personengewichtet, Kinder mit Gewicht 0.5
-  - `5_0`: lineare Zimmer-Umlage (jedes Zimmer gleicher Kostenanteil)
-  - `5_1`: Zimmeranteil je Haus nach Schlafplaetzen (Hausanteil × Zimmerbetten/Hausbetten)
-- Pro Szenario werden Herleitungstabelle, Familien-Kostentabelle (Spalten "VP-Anteil",
-  "Unterkunftskosten", "RAP-Anteil", "Gesamt") und Zimmerbelegungstabelle gerendert.
-- Eigener Abschnitt "Reiseausfallpauschale (RAP)" zeigt Originaltext + Kosten-/Berechnungstabelle
-  (3 EUR/Person/Nacht × 3 Naechte = 9 EUR/Person; 23 Personen = 207 EUR gesamt).
+- Startseite (`src/App.tsx`) zeigt **ein** verbindliches Pricing-Modell "Vereinbarte
+  Kostenaufteilung" (kein Szenario-Vergleich mehr). Die frueheren 5 Szenarien (4_1/4_2/4_3 sowie
+  room-linear 5_0 und room-beds-house 5_1) wurden am 2026-08-01 konsolidiert, nachdem die Familie
+  sich auf die Gewichtung Erw. 1 / Kinder 0,5 geeinigt hat.
+- Sektionen: Planungsgrundlage (Personen, VP-Tarife, Gewichtungs-Uebersicht), Dokumente,
+  Reiseausfallpauschale (Originaltext + Kosten-/Berechnungstabelle), und die Kostenaufteilung mit
+  Herleitungstabelle, Familien-Kostentabelle (Spalten "VP-Anteil", "Unterkunftskosten",
+  "RAP-Anteil", "Gesamt") und Zimmerbelegungstabelle.
+- RAP: 3 EUR/Person/Nacht × 3 Naechte = 9 EUR/Person; 23 Personen = 207 EUR gesamt.
 - Keine Navigation/Routing sichtbar, obwohl `react-router-dom` als Dependency vorhanden ist (derzeit
   ungenutzt bzw. fuer spaetere Erweiterung).
 - Styling: `src/index.css`, reduziertes/eigenes Farb-/Typografie-Setup.
@@ -52,6 +54,7 @@ Stand: 2026-08-01
 
 - `src/data/feuerkuppeData.ts`:
   - Personenzahlen: `ADULT_COUNT=16`, `CHILD_COUNT=6`, `BABY_COUNT=1`.
+  - Umlage-Gewichte: `ADULT_ALLOCATION_WEIGHT=1`, `CHILD_ALLOCATION_WEIGHT=0.5` (nur Bungalow-Umlage).
   - VP-Kosten pro Person: Erwachsene 85,50 €, Kinder 3+ 67,50 €, Kinder 0-3 34,50 €.
     BESTAETIGT durch korrigierten Vertrag `Vertrag_Familien_2027.pdf` (01.08.2026): Vollpension
     als Pauschale pro Person (Einzelpreis p. Pers., NICHT pro Nacht). Werte stimmen exakt.
@@ -61,9 +64,10 @@ Stand: 2026-08-01
   - `FEUERKUPPE_VARIANTS`: enthaelt **nur noch Variante 4** (Bungalowkosten 2754 €, 3× Kat. Ia,
     9 Zimmer). Varianten 1-3 wurden am 2026-08-01 entfernt (nicht gebucht, wurden nie gerendert).
   - `FAMILY_COSTS`: 8 Familien mit Erwachsenen-/Kinder-/Baby-Anzahl (anonymisierte Namen).
-- `src/utils/costs.ts`: Kostenberechnungen fuer alle drei Modi (person-weighted, room-linear,
-  room-beds-house), inkl. `getVariantCosts`, `getWeightedVariantCosts`, `getRoomLinearCosts`,
-  `getRoomBedShareByHouseCosts`, `eur`-Formatierung.
+- `src/utils/costs.ts`: personengewichtete Kostenberechnung `getWeightedVariantCosts`
+  (liefert je Familie `lodging`/`vp`/`rap`/`total`) + `getVariantCosts` (nutzt die vereinbarten
+  Gewichte 1 / 0,5) + `eur`-Formatierung. Die room-linear/room-beds-house-Funktionen wurden am
+  2026-08-01 mit den Vergleichs-Szenarien entfernt.
 
 ## Hinweis zur Projektlinie
 

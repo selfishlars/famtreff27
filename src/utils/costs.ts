@@ -7,8 +7,6 @@ import {
   FAMILY_COSTS,
   RAP_PER_PERSON,
   RAP_TOTAL,
-  type RoomPlan,
-  type VariantPlan,
   VP_ADULT,
   VP_BABY,
   VP_CHILD,
@@ -20,12 +18,6 @@ export const eur = (value: number): string =>
 type WeightedCostOptions = {
   adultWeight: number
   childWeight: number
-}
-
-const getHouseKey = (roomName: string): string => {
-  const marker = ' - '
-  const splitIndex = roomName.indexOf(marker)
-  return splitIndex > 0 ? roomName.slice(0, splitIndex).trim() : 'Gesamtobjekt'
 }
 
 export function getWeightedVariantCosts(
@@ -105,66 +97,4 @@ export function getVariantCosts(bungalowCost: number) {
     adultWeight: ADULT_ALLOCATION_WEIGHT,
     childWeight: CHILD_ALLOCATION_WEIGHT,
   })
-}
-
-export function getRoomLinearCosts(variant: VariantPlan) {
-  const roomCount = variant.rooms.length
-  const roomCost = roomCount > 0 ? variant.bungalowCost / roomCount : 0
-
-  const roomRows = variant.rooms.map((room) => {
-    const occupied = room.occupiedBeds
-    const perOccupiedBed = occupied > 0 ? roomCost / occupied : 0
-
-    return {
-      ...room,
-      roomCost,
-      perOccupiedBed,
-    }
-  })
-
-  return {
-    roomCount,
-    roomCost,
-    roomRows,
-  }
-}
-
-export function getRoomBedShareByHouseCosts(variant: VariantPlan) {
-  const houseBeds = new Map<string, number>()
-
-  variant.rooms.forEach((room) => {
-    const house = getHouseKey(room.room)
-    houseBeds.set(house, (houseBeds.get(house) ?? 0) + room.beds)
-  })
-
-  const houses = Array.from(houseBeds.keys())
-  const houseCount = houses.length
-  const houseShare = houseCount > 0 ? variant.bungalowCost / houseCount : 0
-
-  const roomRows = variant.rooms.map((room: RoomPlan) => {
-    const house = getHouseKey(room.room)
-    const totalHouseBeds = houseBeds.get(house) ?? 0
-    const roomShare = totalHouseBeds > 0
-      ? room.beds / totalHouseBeds
-      : 0
-    const roomCost = houseShare * roomShare
-    const perOccupiedBed = room.occupiedBeds > 0
-      ? roomCost / room.occupiedBeds
-      : 0
-
-    return {
-      ...room,
-      house,
-      totalHouseBeds,
-      roomShare,
-      roomCost,
-      perOccupiedBed,
-    }
-  })
-
-  return {
-    houseCount,
-    houseShare,
-    roomRows,
-  }
 }
