@@ -107,7 +107,7 @@ function App() {
             <h3>Personen</h3>
             <ul>
               <li>Erwachsene: {ADULT_COUNT}</li>
-              <li>Kinder (3+): {CHILD_COUNT}</li>
+              <li>Kinder (4+): {CHILD_COUNT}</li>
               <li>Kinder (0-3): {BABY_COUNT}</li>
             </ul>
           </article>
@@ -115,7 +115,7 @@ function App() {
             <h3>VP-Kosten pro Person</h3>
             <ul>
               <li>Erwachsene: {eur(VP_ADULT)}</li>
-              <li>Kinder (3+): {eur(VP_CHILD)}</li>
+              <li>Kinder (4+): {eur(VP_CHILD)}</li>
               <li>Kinder (0-3): {eur(VP_BABY)}</li>
             </ul>
           </article>
@@ -204,7 +204,7 @@ function App() {
               </tr>
               <tr>
                 <td>Personen gesamt (inkl. Kinder/Babys)</td>
-                <td>{ADULT_COUNT} Erw. + {CHILD_COUNT} Kinder (3+) + {BABY_COUNT} Kind (0-3)</td>
+                <td>{ADULT_COUNT} Erw. + {CHILD_COUNT} Kinder (4+) + {BABY_COUNT} Kind (0-3)</td>
                 <td>{TOTAL_PERSONS}</td>
               </tr>
               <tr>
@@ -260,7 +260,7 @@ function App() {
                 <td>{costs.adultWeight.toLocaleString('de-DE')}</td>
               </tr>
               <tr>
-                <td>Gewichtung Kinder (3+ und 0-3)</td>
+                <td>Gewichtung Kinder (4+ und 0-3)</td>
                 <td>Fixwert je Kind (Alter egal)</td>
                 <td>{costs.childWeight.toLocaleString('de-DE')}</td>
               </tr>
@@ -293,7 +293,7 @@ function App() {
                 <td>{eur(costs.adultPrice)}</td>
               </tr>
               <tr>
-                <td>Preis pro Kind 3+ (Unterkunft + VP)</td>
+                <td>Preis pro Kind 4+ (Unterkunft + VP)</td>
                 <td>{eur(costs.childOvernight)} + {eur(VP_CHILD)}</td>
                 <td>{eur(costs.childPrice)}</td>
               </tr>
@@ -339,7 +339,7 @@ function App() {
               <tr>
                 <th>Familie</th>
                 <th>Erw.</th>
-                <th>Kind 3+</th>
+                <th>Kind 4+</th>
                 <th>Kind 0-3</th>
                 <th>VP-Anteil</th>
                 <th>Unterkunftskosten</th>

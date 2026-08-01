@@ -23,7 +23,7 @@ Stand: 2026-08-01
 - **Unterkunfts-Umlage (Bungalow):** Erwachsene Gewicht **1,0**, **alle Kinder 0,5** – unabhaengig
   vom Alter (auch Kinder 0-3). Kinder sind alle unter 10 Jahren, es wird nicht feiner aufgeteilt.
   -> Umlageeinheiten = 15×1 + 7×0,5 = **18,5**; Bungalow-Umlage je Einheit = 2754/18,5 = 148,86 €.
-- **VP-Kosten:** **jede Person exakt** ihren Tarif (Erw. 85,50 / Kind 3+ 67,50 / Kind 0-3 34,50 €),
+- **VP-Kosten:** **jede Person exakt** ihren Tarif (Erw. 85,50 / Kind 4+ 67,50 / Kind 0-3 34,50 €),
   **kein** Split, keine Gewichtung.
 - **RAP:** exakt pro Kopf, **voll** auch fuer Kinder 0-3 (9 EUR/Person), kein Split.
 - **Bettwaesche:** optional, **7,50 EUR/Person** (Vertrag 2027), nur fuer Familien die sie wuenschen.
@@ -34,7 +34,7 @@ Stand: 2026-08-01
   `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
   VP, RAP und Bettwaesche werden immer personengenau addiert.
 - **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 + Bettwaesche 60 (optional)
-  = **4.701,00 €**. (15 Erwachsene / 5 Kinder 3+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis fix.)
+  = **4.701,00 €**. (15 Erwachsene / 5 Kinder 4+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis fix.)
 
 ## Aktueller Produktzustand
 
@@ -64,7 +64,7 @@ Stand: 2026-08-01
     hat abgesagt, 2026-08-01). `BABY_COUNT=2`: ein zweites Kind faellt beim VP-Tarif in die Gruppe
     0-3 (naehere personenbezogene Angaben bewusst NICHT dokumentiert).
   - Umlage-Gewichte: `ADULT_ALLOCATION_WEIGHT=1`, `CHILD_ALLOCATION_WEIGHT=0.5` (nur Bungalow-Umlage).
-  - VP-Kosten pro Person: Erwachsene 85,50 €, Kinder 3+ 67,50 €, Kinder 0-3 34,50 €.
+  - VP-Kosten pro Person: Erwachsene 85,50 €, Kinder 4+ 67,50 €, Kinder 0-3 34,50 €.
     BESTAETIGT durch korrigierten Vertrag `Vertrag_Familien_2027.pdf` (01.08.2026): Vollpension
     als Pauschale pro Person (Einzelpreis p. Pers., NICHT pro Nacht). Werte stimmen exakt.
     (Der alte Vertrag vom 15.07. war Halbpension 57/45/21 € pro Nacht -> ueberholt.)
