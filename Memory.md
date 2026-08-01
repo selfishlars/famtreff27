@@ -22,14 +22,15 @@ Stand: 2026-08-01
 
 - **Unterkunfts-Umlage (Bungalow):** Erwachsene Gewicht **1,0**, **alle Kinder 0,5** – unabhaengig
   vom Alter (auch Kinder 0-3). Kinder sind alle unter 10 Jahren, es wird nicht feiner aufgeteilt.
-  -> Umlageeinheiten = 16×1 + 7×0,5 = **19,5**; Bungalow-Umlage je Einheit = 2754/19,5 = 141,23 €.
+  -> Umlageeinheiten = 15×1 + 7×0,5 = **18,5**; Bungalow-Umlage je Einheit = 2754/18,5 = 148,86 €.
 - **VP-Kosten:** **jede Person exakt** ihren Tarif (Erw. 85,50 / Kind 3+ 67,50 / Kind 0-3 34,50 €),
   **kein** Split, keine Gewichtung.
 - **RAP:** exakt pro Kopf, **voll** auch fuer Kinder 0-3 (9 EUR/Person), kein Split.
 - Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
   `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
   VP und RAP werden immer personengenau addiert.
-- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1807,50 + RAP 207 = **4.768,50 €**.
+- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1722 + RAP 198 = **4.674,00 €**.
+  (Junior Blizzard N sagte ab -> nur noch 15 Erwachsene / 22 Personen; Bungalowpreis bleibt fix.)
 
 ## Aktueller Produktzustand
 
@@ -41,7 +42,7 @@ Stand: 2026-08-01
   Reiseausfallpauschale (Originaltext + Kosten-/Berechnungstabelle), und die Kostenaufteilung mit
   Herleitungstabelle, Familien-Kostentabelle (Spalten "VP-Anteil", "Unterkunftskosten",
   "RAP-Anteil", "Gesamt") und Zimmerbelegungstabelle.
-- RAP: 3 EUR/Person/Nacht × 3 Naechte = 9 EUR/Person; 23 Personen = 207 EUR gesamt.
+- RAP: 3 EUR/Person/Nacht × 3 Naechte = 9 EUR/Person; 22 Personen = 198 EUR gesamt.
 - Keine Navigation/Routing sichtbar, obwohl `react-router-dom` als Dependency vorhanden ist (derzeit
   ungenutzt bzw. fuer spaetere Erweiterung).
 - Styling: `src/index.css`, reduziertes/eigenes Farb-/Typografie-Setup.
@@ -55,14 +56,15 @@ Stand: 2026-08-01
 ## Fachlogik / Datenmodell
 
 - `src/data/feuerkuppeData.ts`:
-  - Personenzahlen: `ADULT_COUNT=16`, `CHILD_COUNT=6`, `BABY_COUNT=1`.
+  - Personenzahlen: `ADULT_COUNT=15`, `CHILD_COUNT=6`, `BABY_COUNT=1` (22 gesamt; Junior Blizzard N
+    hat abgesagt, 2026-08-01).
   - Umlage-Gewichte: `ADULT_ALLOCATION_WEIGHT=1`, `CHILD_ALLOCATION_WEIGHT=0.5` (nur Bungalow-Umlage).
   - VP-Kosten pro Person: Erwachsene 85,50 €, Kinder 3+ 67,50 €, Kinder 0-3 34,50 €.
     BESTAETIGT durch korrigierten Vertrag `Vertrag_Familien_2027.pdf` (01.08.2026): Vollpension
     als Pauschale pro Person (Einzelpreis p. Pers., NICHT pro Nacht). Werte stimmen exakt.
     (Der alte Vertrag vom 15.07. war Halbpension 57/45/21 € pro Nacht -> ueberholt.)
   - RAP-Konstanten: `NIGHTS=3`, `RAP_PER_PERSON_PER_NIGHT=3`, `RAP_PER_PERSON=9`,
-    `TOTAL_PERSONS=23`, `RAP_TOTAL=207`.
+    `TOTAL_PERSONS=22`, `RAP_TOTAL=198`.
   - `FEUERKUPPE_PLAN` (Typ `AccommodationPlan`): **ein** Objekt fuer die gebuchte Unterkunft
     (Bungalowkosten 2754 €, 3× Kat. Ia, 9 Zimmer). Kein `id`/`title`, kein "Varianten"-Konzept mehr.
     Frueher `FEUERKUPPE_VARIANTS`-Array (Varianten 1-3 am 2026-08-01 entfernt, dann auf Einzelobjekt
@@ -100,6 +102,10 @@ Stand: 2026-08-01
   Verpflegung HP/Nacht -> **VP-Pauschale pro Person** (85,50/67,50/34,50 €), Bettwaesche 6 -> 7,50 €.
 - RAP (Reiseausfallpauschale) ist laut Rezeption ein offizielles Angebot ab 2026.
 - Frist: Unterlagen inkl. Programmwuensche innerhalb 4 Wochen (ab 01.08.2026) zuruecksenden.
+- **Revidiertes Angebot/Vertrag fuer 22 Personen angefordert:** Junior Blizzard N sagt bereits vor
+  Vertragsabschluss ab. Da noch kein Vertrag geschlossen ist, wird direkt ein Vertrag ueber 22
+  Personen verlangt (statt 23) -> keine nachtraegliche Teilnehmerreduzierung/Storno noetig. Website
+  rechnet bereits mit 22; Doku-Kachel "Vertrag Familien" entsprechend angepasst.
 
 ## Offene Punkte
 

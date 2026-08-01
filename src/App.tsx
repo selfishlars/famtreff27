@@ -55,7 +55,7 @@ const DOCUMENT_SUMMARIES: DocumentSummary[] = [
   {
     title: 'Vertrag Familien (Leistungsvertrag)',
     summary:
-      'Unser konkreter Buchungsvertrag: Termin 06.–09.05.2027, 23 Personen, 3× Bungalow Kat. Ia, Verpflegungspauschalen je Personengruppe.',
+      'Unser konkreter Buchungsvertrag: Termin 06.–09.05.2027, 3× Bungalow Kat. Ia, Verpflegungspauschalen je Personengruppe. Revidiertes Angebot fuer 22 Personen angefordert (Junior Blizzard N sagt vor Vertragsabschluss ab).',
   },
 ]
 

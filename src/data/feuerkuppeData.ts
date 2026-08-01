@@ -22,7 +22,7 @@ export type FamilyCost = {
   babies: number
 }
 
-export const ADULT_COUNT = 16
+export const ADULT_COUNT = 15
 export const CHILD_COUNT = 6
 export const BABY_COUNT = 1
 // Vereinbarte Kostenaufteilung (Familien-Planungsabsprache): Erwachsene tragen die
@@ -49,7 +49,7 @@ export const RAP_TOTAL = TOTAL_PERSONS * RAP_PER_PERSON
 export const FAMILY_COSTS: FamilyCost[] = [
   { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0 },
   { family: 'Senior Blizzard J/U', adults: 2, children: 0, babies: 0 },
-  { family: 'Junior Blizzard J/N', adults: 2, children: 0, babies: 0 },
+  { family: 'Junior Blizzard J', adults: 1, children: 0, babies: 0 },
   { family: 'Familie Molinero L/K + Kinder', adults: 2, children: 2, babies: 0 },
   { family: 'Familie Windymillymill B/K + Kinder', adults: 2, children: 2, babies: 0 },
   { family: 'Senior Sonntagskind T/P', adults: 2, children: 0, babies: 0 },
@@ -72,6 +72,6 @@ export const FEUERKUPPE_PLAN: AccommodationPlan = {
       { room: 'Ia-Haus 2 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 1, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero E, 1 Bett frei' },
       { room: 'Ia-Haus 3 - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero L und K, Junior Molinero L und S, 2 Betten frei' },
       { room: 'Ia-Haus 3 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Blizzard J und U, 2 Betten frei' },
-      { room: 'Ia-Haus 3 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Junior Blizzard J und N' },
+      { room: 'Ia-Haus 3 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 1, bathroom: 'Eigenes DU/WC', occupancy: 'Junior Blizzard J, 1 Bett frei' },
   ],
 }
