@@ -31,11 +31,11 @@ Stand: 2026-08-01
   Sonntagskind 2, Molinero E/J 2 -> 8 Personen = **60 EUR**. Als eigene Spalte + Summenzeile gefuehrt,
   im jeweiligen Gesamt enthalten.
 - **Festraum (Gemeinschaftsraum ~80 qm):** gebucht 100 EUR/Tag × 2 Tage (Fr + Sa) = **200 EUR**.
-  Gemeinschaftskosten, verteilt **wie die Bungalow-Umlage** (Erw. 1 / Kinder 0,5, 18,5 Einheiten
-  -> ~10,81 EUR/Erw., ~5,41 EUR/Kind). Eigene Spalte + Summenzeile, im Gesamt enthalten.
-- Technisch: Gewichtung betrifft die Bungalow-Umlage **und** den Festraum (`ADULT_ALLOCATION_WEIGHT=1`,
+  Wird **komplett von Senior Molinero E/J** getragen (Flag `coversFestraum`), da sie **zwei Zimmer**
+  belegen. **Keine** Umlage auf die uebrigen Familien. Eigene Spalte + Summenzeile, im Gesamt enthalten.
+- Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
   `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
-  VP, RAP und Bettwaesche werden immer personengenau addiert.
+  VP, RAP und Bettwaesche personengenau; Festraum als Ganzes auf die tragende Familie.
 - **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 + Bettwaesche 60 + Festraum 200
   = **4.901,00 €**. (15 Erwachsene / 5 Kinder 4+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis fix.)
 
@@ -75,8 +75,9 @@ Stand: 2026-08-01
     `TOTAL_PERSONS=22`, `RAP_TOTAL=198`.
   - Bettwaesche: `LINEN_PER_PERSON=7.5`; optionales Feld `linen?` je `FamilyCost` (Personen mit Wunsch).
     `getWeightedPlanCosts` liefert je Familie zusaetzlich `linen` (EUR) und gesamt `linenTotal`.
-  - Festraum: `FESTRAUM_PER_DAY=100`, `FESTRAUM_DAYS=2`, `FESTRAUM_TOTAL=200`. `getWeightedPlanCosts`
-    liefert je Familie `festraum` (EUR) sowie `festraumTotal`/`festraumSharePerUnit` (Umlage wie Bungalow).
+  - Festraum: `FESTRAUM_PER_DAY=100`, `FESTRAUM_DAYS=2`, `FESTRAUM_TOTAL=200`. Flag `coversFestraum?`
+    je `FamilyCost` (true = traegt Festraum allein). `getWeightedPlanCosts` gibt je Familie `festraum`
+    (0 oder 200) und gesamt `festraumTotal`. Aktuell: Senior Molinero E/J = 200.
   - `FEUERKUPPE_PLAN` (Typ `AccommodationPlan`): **ein** Objekt fuer die gebuchte Unterkunft
     (Bungalowkosten 2754 €, 3× Kat. Ia, 9 Zimmer). Kein `id`/`title`, kein "Varianten"-Konzept mehr.
     Frueher `FEUERKUPPE_VARIANTS`-Array (Varianten 1-3 am 2026-08-01 entfernt, dann auf Einzelobjekt
@@ -131,7 +132,8 @@ Stand: 2026-08-01
   - Mehrzweckhalle* (~250 qm): 150 EUR – Feiern/Disco/Seminare.
   - Kleinkunstbuehne (99 Pers.): 20 EUR 1. Std, dann 10 EUR/Std – Kinobestuhlung + Technik.
   - Festraum* (~80 qm): 100 EUR/Tag – unterteilbar, eigene Kueche.
-- **Gebucht: Festraum ~80 qm, Fr + Sa (2 Tage) = 200 EUR** (siehe Kostenmodell).
+- **Gebucht: Festraum ~80 qm, Fr + Sa (2 Tage) = 200 EUR** (siehe Kostenmodell); Kosten uebernimmt
+  Senior Molinero E/J (zwei Zimmer).
 
 ## Offene Punkte
 

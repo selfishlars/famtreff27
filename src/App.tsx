@@ -333,13 +333,8 @@ function App() {
               </tr>
               <tr>
                 <td>Festraum gesamt</td>
-                <td>{eur(FESTRAUM_PER_DAY)} × {FESTRAUM_DAYS} Tage (Fr + Sa), verteilt wie Umlage</td>
+                <td>{eur(FESTRAUM_PER_DAY)} × {FESTRAUM_DAYS} Tage (Fr + Sa) – getragen von Senior Molinero E/J</td>
                 <td>{eur(costs.festraumTotal)}</td>
-              </tr>
-              <tr>
-                <td>Festraum-Umlage je Einheit</td>
-                <td>{eur(costs.festraumTotal)} / {costs.overnightAllocationUnits.toLocaleString('de-DE')}</td>
-                <td>{eur(costs.festraumSharePerUnit)}</td>
               </tr>
               <tr>
                 <td>Gesamtkosten</td>
@@ -381,7 +376,7 @@ function App() {
                   <td>{eur(family.lodging)}</td>
                   <td>{eur(family.rap)}</td>
                   <td>{family.linen > 0 ? eur(family.linen) : '–'}</td>
-                  <td>{eur(family.festraum)}</td>
+                  <td>{family.festraum > 0 ? eur(family.festraum) : '–'}</td>
                   <td>{eur(family.total)}</td>
                 </tr>
               ))}
@@ -394,8 +389,8 @@ function App() {
         </p>
         <p className="muted">
           Festraum (~80 m²): {eur(FESTRAUM_PER_DAY)}/Tag für {FESTRAUM_DAYS} Tage (Freitag + Samstag)
-          = {eur(costs.festraumTotal)}. Als Gemeinschaftskosten wie die Unterkunfts-Umlage gewichtet
-          (Erwachsene 1 / Kinder 0,5) auf alle Familien verteilt.
+          = {eur(costs.festraumTotal)}. Wird komplett von Senior Molinero E/J getragen (sie belegen
+          zwei Zimmer) – keine Umlage auf die übrigen Familien.
         </p>
 
         <div className="table-wrap">

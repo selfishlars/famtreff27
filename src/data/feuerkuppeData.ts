@@ -22,6 +22,8 @@ export type FamilyCost = {
   babies: number
   // Anzahl Personen dieser Familie, die Bettwaesche wuenschen (0 = keine).
   linen?: number
+  // true = diese Familie traegt die kompletten Festraum-Kosten allein.
+  coversFestraum?: boolean
 }
 
 export const ADULT_COUNT = 15
@@ -52,13 +54,14 @@ export const RAP_PER_PERSON = RAP_PER_PERSON_PER_NIGHT * NIGHTS
 export const RAP_TOTAL = TOTAL_PERSONS * RAP_PER_PERSON
 
 // Festraum (Gemeinschaftsraum ~80 qm): 100 EUR/Tag, gebucht Freitag + Samstag = 2 Tage.
-// Gemeinschaftskosten, verteilt wie die Bungalow-Umlage (Erwachsene 1 / Kinder 0,5).
+// Kosten werden komplett von Senior Molinero E/J getragen (siehe coversFestraum), da sie
+// zwei Zimmer belegen. Keine Umlage auf die uebrigen Familien.
 export const FESTRAUM_PER_DAY = 100
 export const FESTRAUM_DAYS = 2
 export const FESTRAUM_TOTAL = FESTRAUM_PER_DAY * FESTRAUM_DAYS
 
 export const FAMILY_COSTS: FamilyCost[] = [
-  { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0, linen: 2 },
+  { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0, linen: 2, coversFestraum: true },
   { family: 'Senior Blizzard J/U', adults: 2, children: 0, babies: 0 },
   { family: 'Junior Blizzard J', adults: 1, children: 0, babies: 0 },
   { family: 'Familie Molinero L/K + Kinder', adults: 2, children: 2, babies: 0 },
