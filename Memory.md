@@ -26,11 +26,15 @@ Stand: 2026-08-01
 - **VP-Kosten:** **jede Person exakt** ihren Tarif (Erw. 85,50 / Kind 3+ 67,50 / Kind 0-3 34,50 €),
   **kein** Split, keine Gewichtung.
 - **RAP:** exakt pro Kopf, **voll** auch fuer Kinder 0-3 (9 EUR/Person), kein Split.
+- **Bettwaesche:** optional, **7,50 EUR/Person** (Vertrag 2027), nur fuer Familien die sie wuenschen.
+  Feld `linen` je Familie in `FAMILY_COSTS` (= Anzahl Personen mit Wunsch). Aktuell: ElectricalResistance 4,
+  Sonntagskind 2, Molinero E/J 2 -> 8 Personen = **60 EUR**. Als eigene Spalte + Summenzeile gefuehrt,
+  im jeweiligen Gesamt enthalten.
 - Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
   `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
-  VP und RAP werden immer personengenau addiert.
-- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 = **4.641,00 €**.
-  (15 Erwachsene / 5 Kinder 3+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis bleibt fix.)
+  VP, RAP und Bettwaesche werden immer personengenau addiert.
+- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 + Bettwaesche 60 (optional)
+  = **4.701,00 €**. (15 Erwachsene / 5 Kinder 3+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis fix.)
 
 ## Aktueller Produktzustand
 
@@ -41,7 +45,7 @@ Stand: 2026-08-01
 - Sektionen: Planungsgrundlage (Personen, VP-Tarife, Gewichtungs-Uebersicht), Dokumente,
   Reiseausfallpauschale (Originaltext + Kosten-/Berechnungstabelle), und die Kostenaufteilung mit
   Herleitungstabelle, Familien-Kostentabelle (Spalten "VP-Anteil", "Unterkunftskosten",
-  "RAP-Anteil", "Gesamt") und Zimmerbelegungstabelle.
+  "RAP-Anteil", "Bettwäsche", "Gesamt") und Zimmerbelegungstabelle.
 - RAP: 3 EUR/Person/Nacht × 3 Naechte = 9 EUR/Person; 22 Personen = 198 EUR gesamt.
 - Keine Navigation/Routing sichtbar, obwohl `react-router-dom` als Dependency vorhanden ist (derzeit
   ungenutzt bzw. fuer spaetere Erweiterung).
@@ -66,6 +70,8 @@ Stand: 2026-08-01
     (Der alte Vertrag vom 15.07. war Halbpension 57/45/21 € pro Nacht -> ueberholt.)
   - RAP-Konstanten: `NIGHTS=3`, `RAP_PER_PERSON_PER_NIGHT=3`, `RAP_PER_PERSON=9`,
     `TOTAL_PERSONS=22`, `RAP_TOTAL=198`.
+  - Bettwaesche: `LINEN_PER_PERSON=7.5`; optionales Feld `linen?` je `FamilyCost` (Personen mit Wunsch).
+    `getWeightedPlanCosts` liefert je Familie zusaetzlich `linen` (EUR) und gesamt `linenTotal`.
   - `FEUERKUPPE_PLAN` (Typ `AccommodationPlan`): **ein** Objekt fuer die gebuchte Unterkunft
     (Bungalowkosten 2754 €, 3× Kat. Ia, 9 Zimmer). Kein `id`/`title`, kein "Varianten"-Konzept mehr.
     Frueher `FEUERKUPPE_VARIANTS`-Array (Varianten 1-3 am 2026-08-01 entfernt, dann auf Einzelobjekt

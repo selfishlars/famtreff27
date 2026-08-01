@@ -5,6 +5,7 @@ import {
   CHILD_ALLOCATION_WEIGHT,
   CHILD_COUNT,
   FAMILY_COSTS,
+  LINEN_PER_PERSON,
   RAP_PER_PERSON,
   RAP_TOTAL,
   VP_ADULT,
@@ -44,7 +45,11 @@ export function getWeightedPlanCosts(
   const childPrice = childOvernight + VP_CHILD
   const child03Price = childOvernight + VP_BABY
   const rapTotal = RAP_TOTAL
-  const total = bungalowCost + vpTotal + rapTotal
+  const linenTotal = FAMILY_COSTS.reduce(
+    (sum, family) => sum + (family.linen ?? 0) * LINEN_PER_PERSON,
+    0,
+  )
+  const total = bungalowCost + vpTotal + rapTotal + linenTotal
 
   const familyRows = FAMILY_COSTS.map((family) => {
     const overnightUnits =
@@ -58,14 +63,16 @@ export function getWeightedPlanCosts(
 
     const familyPersons = family.adults + family.children + family.babies
     const familyRap = familyPersons * RAP_PER_PERSON
+    const familyLinen = (family.linen ?? 0) * LINEN_PER_PERSON
 
     const familyLodging = overnightUnits * overnightSharePerUnit
-    const familyTotal = familyLodging + familyVp + familyRap
+    const familyTotal = familyLodging + familyVp + familyRap + familyLinen
 
     return {
       ...family,
       vp: familyVp,
       rap: familyRap,
+      linen: familyLinen,
       lodging: familyLodging,
       total: familyTotal,
     }
@@ -87,6 +94,7 @@ export function getWeightedPlanCosts(
     child03Price,
     rapPerPerson: RAP_PER_PERSON,
     rapTotal,
+    linenTotal,
     total,
       familyRows,
     }

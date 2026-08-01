@@ -20,6 +20,8 @@ export type FamilyCost = {
   adults: number
   children: number
   babies: number
+  // Anzahl Personen dieser Familie, die Bettwaesche wuenschen (0 = keine).
+  linen?: number
 }
 
 export const ADULT_COUNT = 15
@@ -38,6 +40,9 @@ export const VP_ADULT = 85.5
 export const VP_CHILD = 67.5
 export const VP_BABY = 34.5
 
+// Bettwaesche optional: 7,50 EUR pro Person (Vertrag 2027), nur wer sie wuenscht.
+export const LINEN_PER_PERSON = 7.5
+
 // Reiseausfallpauschale (RAP): 3,00 EUR pro Person und pro Uebernachtung,
 // gilt fuer die gesamte Gruppe inkl. Begleitpersonen (auch Kinder/Babys).
 export const NIGHTS = 3
@@ -47,13 +52,13 @@ export const RAP_PER_PERSON = RAP_PER_PERSON_PER_NIGHT * NIGHTS
 export const RAP_TOTAL = TOTAL_PERSONS * RAP_PER_PERSON
 
 export const FAMILY_COSTS: FamilyCost[] = [
-  { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0 },
+  { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0, linen: 2 },
   { family: 'Senior Blizzard J/U', adults: 2, children: 0, babies: 0 },
   { family: 'Junior Blizzard J', adults: 1, children: 0, babies: 0 },
   { family: 'Familie Molinero L/K + Kinder', adults: 2, children: 2, babies: 0 },
   { family: 'Familie Windymillymill B/K + Kinder', adults: 2, children: 1, babies: 1 },
-  { family: 'Senior Sonntagskind T/P', adults: 2, children: 0, babies: 0 },
-  { family: 'Familie ElectricalResistance K/K + Kinder', adults: 2, children: 2, babies: 0 },
+  { family: 'Senior Sonntagskind T/P', adults: 2, children: 0, babies: 0, linen: 2 },
+  { family: 'Familie ElectricalResistance K/K + Kinder', adults: 2, children: 2, babies: 0, linen: 4 },
   { family: 'Familie Sullivan W/S + Kind 0-3', adults: 2, children: 0, babies: 1 },
 ]
 

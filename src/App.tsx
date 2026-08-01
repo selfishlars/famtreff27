@@ -5,6 +5,7 @@ import {
   CHILD_ALLOCATION_WEIGHT,
   CHILD_COUNT,
   FEUERKUPPE_PLAN,
+  LINEN_PER_PERSON,
   NIGHTS,
   RAP_PER_PERSON,
   RAP_PER_PERSON_PER_NIGHT,
@@ -237,6 +238,7 @@ function App() {
             <p>Bungalows: {eur(plan.bungalowCost)}</p>
             <p>VP gesamt: {eur(costs.vpTotal)}</p>
             <p>RAP gesamt: {eur(costs.rapTotal)}</p>
+            <p>Bettwäsche gesamt: {eur(costs.linenTotal)}</p>
             <p className="sum">Gesamt: {eur(costs.total)}</p>
           </div>
         </header>
@@ -314,8 +316,16 @@ function App() {
                 <td>{eur(costs.rapTotal)}</td>
               </tr>
               <tr>
+                <td>Bettwäsche gesamt</td>
+                <td>Summe gewünschter Sets × {eur(LINEN_PER_PERSON)} / Person</td>
+                <td>{eur(costs.linenTotal)}</td>
+              </tr>
+              <tr>
                 <td>Gesamtkosten</td>
-                <td>{eur(plan.bungalowCost)} + {eur(costs.vpTotal)} + {eur(costs.rapTotal)}</td>
+                <td>
+                  {eur(plan.bungalowCost)} + {eur(costs.vpTotal)} + {eur(costs.rapTotal)} +{' '}
+                  {eur(costs.linenTotal)}
+                </td>
                 <td>{eur(costs.total)}</td>
               </tr>
             </tbody>
@@ -334,6 +344,7 @@ function App() {
                 <th>VP-Anteil</th>
                 <th>Unterkunftskosten</th>
                 <th>RAP-Anteil</th>
+                <th>Bettwäsche</th>
                 <th>Gesamt</th>
               </tr>
             </thead>
@@ -347,12 +358,17 @@ function App() {
                   <td>{eur(family.vp)}</td>
                   <td>{eur(family.lodging)}</td>
                   <td>{eur(family.rap)}</td>
+                  <td>{family.linen > 0 ? eur(family.linen) : '–'}</td>
                   <td>{eur(family.total)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <p className="muted">
+          Bettwäsche ist optional ({eur(LINEN_PER_PERSON)} pro Person, Vertrag 2027) und wird nur den
+          Familien berechnet, die sie wünschen; der Anteil ist im jeweiligen Gesamt enthalten.
+        </p>
 
         <div className="table-wrap">
           <table>
