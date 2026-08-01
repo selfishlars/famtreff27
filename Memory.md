@@ -10,11 +10,13 @@ Stand: 2026-08-01
 ## Kurzstatus
 
 - Die Web-App ist aktiv und zeigt **ein** verbindliches Pricing-Modell "Vereinbarte
-  Kostenaufteilung" fuer **Variante 4** ("Familientreffen 2027", Feuerkuppe), inkl. RAP je Familie.
-- Verlauf 2026-08-01: RAP erfasst + Varianten 1-3 entfernt (Commit `88b4fae`), danach auf das
-  vereinbarte Gewichtungsmodell (Erw. 1 / Kinder 0,5) konsolidiert und die Vergleichs-Szenarien
-  entfernt. VP-Werte durch korrigierten Vertrag 2027 bestaetigt. GitHub-Pages-Deploy laeuft
-  automatisch bei Push auf `main`.
+  Kostenaufteilung" fuer die eine gebuchte Unterkunft ("Familientreffen 2027", Feuerkuppe), inkl.
+  RAP je Familie.
+- Verlauf 2026-08-01: RAP erfasst + alte Varianten 1-3 entfernt (Commit `88b4fae`), auf das
+  vereinbarte Gewichtungsmodell (Erw. 1 / Kinder 0,5) konsolidiert, dann die "Varianten"-
+  Terminologie komplett entfernt (nur noch ein Plan `FEUERKUPPE_PLAN`, kein Szenario-Konzept mehr).
+  VP-Werte durch korrigierten Vertrag 2027 bestaetigt. GitHub-Pages-Deploy laeuft automatisch bei
+  Push auf `main`.
 
 ## Kostenaufteilungs-Festlegung (Familie, verbindlich – Planungsabsprache)
 
@@ -25,7 +27,7 @@ Stand: 2026-08-01
   **kein** Split, keine Gewichtung.
 - **RAP:** exakt pro Kopf, **voll** auch fuer Kinder 0-3 (9 EUR/Person), kein Split.
 - Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
-  `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedVariantCosts`);
+  `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
   VP und RAP werden immer personengenau addiert.
 - **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1807,50 + RAP 207 = **4.768,50 €**.
 
@@ -61,11 +63,13 @@ Stand: 2026-08-01
     (Der alte Vertrag vom 15.07. war Halbpension 57/45/21 € pro Nacht -> ueberholt.)
   - RAP-Konstanten: `NIGHTS=3`, `RAP_PER_PERSON_PER_NIGHT=3`, `RAP_PER_PERSON=9`,
     `TOTAL_PERSONS=23`, `RAP_TOTAL=207`.
-  - `FEUERKUPPE_VARIANTS`: enthaelt **nur noch Variante 4** (Bungalowkosten 2754 €, 3× Kat. Ia,
-    9 Zimmer). Varianten 1-3 wurden am 2026-08-01 entfernt (nicht gebucht, wurden nie gerendert).
+  - `FEUERKUPPE_PLAN` (Typ `AccommodationPlan`): **ein** Objekt fuer die gebuchte Unterkunft
+    (Bungalowkosten 2754 €, 3× Kat. Ia, 9 Zimmer). Kein `id`/`title`, kein "Varianten"-Konzept mehr.
+    Frueher `FEUERKUPPE_VARIANTS`-Array (Varianten 1-3 am 2026-08-01 entfernt, dann auf Einzelobjekt
+    reduziert).
   - `FAMILY_COSTS`: 8 Familien mit Erwachsenen-/Kinder-/Baby-Anzahl (anonymisierte Namen).
-- `src/utils/costs.ts`: personengewichtete Kostenberechnung `getWeightedVariantCosts`
-  (liefert je Familie `lodging`/`vp`/`rap`/`total`) + `getVariantCosts` (nutzt die vereinbarten
+- `src/utils/costs.ts`: personengewichtete Kostenberechnung `getWeightedPlanCosts`
+  (liefert je Familie `lodging`/`vp`/`rap`/`total`) + `getPlanCosts` (nutzt die vereinbarten
   Gewichte 1 / 0,5) + `eur`-Formatierung. Die room-linear/room-beds-house-Funktionen wurden am
   2026-08-01 mit den Vergleichs-Szenarien entfernt.
 

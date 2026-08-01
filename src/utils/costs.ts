@@ -20,7 +20,7 @@ type WeightedCostOptions = {
   childWeight: number
 }
 
-export function getWeightedVariantCosts(
+export function getWeightedPlanCosts(
   bungalowCost: number,
   { adultWeight, childWeight }: WeightedCostOptions,
 ) {
@@ -92,8 +92,8 @@ export function getWeightedVariantCosts(
     }
 }
 
-export function getVariantCosts(bungalowCost: number) {
-  return getWeightedVariantCosts(bungalowCost, {
+export function getPlanCosts(bungalowCost: number) {
+  return getWeightedPlanCosts(bungalowCost, {
     adultWeight: ADULT_ALLOCATION_WEIGHT,
     childWeight: CHILD_ALLOCATION_WEIGHT,
   })

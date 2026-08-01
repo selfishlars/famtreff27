@@ -4,7 +4,7 @@ import {
   BABY_COUNT,
   CHILD_ALLOCATION_WEIGHT,
   CHILD_COUNT,
-  FEUERKUPPE_VARIANTS,
+  FEUERKUPPE_PLAN,
   NIGHTS,
   RAP_PER_PERSON,
   RAP_PER_PERSON_PER_NIGHT,
@@ -14,7 +14,7 @@ import {
   VP_BABY,
   VP_CHILD,
 } from './data/feuerkuppeData'
-import { eur, getVariantCosts } from './utils/costs'
+import { eur, getPlanCosts } from './utils/costs'
 
 type DocumentSummary = {
   title: string
@@ -60,20 +60,8 @@ const DOCUMENT_SUMMARIES: DocumentSummary[] = [
 ]
 
 function App() {
-  const variant = FEUERKUPPE_VARIANTS.find((item) => item.id === '4')
-
-  if (!variant) {
-    return (
-      <main className="page-wrap">
-        <section className="hero-card" aria-live="polite">
-          <p className="offline-kicker">Familientreffen 2027</p>
-          <h1>Variante 4 nicht gefunden</h1>
-        </section>
-      </main>
-    )
-  }
-
-  const costs = getVariantCosts(variant.bungalowCost)
+  const plan = FEUERKUPPE_PLAN
+  const costs = getPlanCosts(plan.bungalowCost)
 
   return (
     <main className="page-wrap">
@@ -207,21 +195,21 @@ function App() {
         </p>
       </section>
 
-      <section className="variant-card">
-        <header className="variant-header">
+      <section className="plan-card">
+        <header className="plan-header">
           <div>
             <h2>Vereinbarte Kostenaufteilung</h2>
             <p className="muted">
-              {variant.housingSetup} · {variant.categoryLabel}
+              {plan.housingSetup} · {plan.categoryLabel}
             </p>
-            <p className="muted">{variant.accessibility}</p>
+            <p className="muted">{plan.accessibility}</p>
             <p className="muted">
               Unterkunfts-Umlage gewichtet (Erwachsene {costs.adultWeight.toLocaleString('de-DE')},
               Kinder {costs.childWeight.toLocaleString('de-DE')}); VP und RAP exakt pro Person.
             </p>
           </div>
-          <div className="variant-totals">
-            <p>Bungalows: {eur(variant.bungalowCost)}</p>
+          <div className="plan-totals">
+            <p>Bungalows: {eur(plan.bungalowCost)}</p>
             <p>VP gesamt: {eur(costs.vpTotal)}</p>
             <p>RAP gesamt: {eur(costs.rapTotal)}</p>
             <p className="sum">Gesamt: {eur(costs.total)}</p>
@@ -259,7 +247,7 @@ function App() {
               </tr>
               <tr>
                 <td>Bungalow-Umlage je Einheit</td>
-                <td>{eur(variant.bungalowCost)} / {costs.overnightAllocationUnits.toLocaleString('de-DE')}</td>
+                <td>{eur(plan.bungalowCost)} / {costs.overnightAllocationUnits.toLocaleString('de-DE')}</td>
                 <td>{eur(costs.overnightSharePerUnit)}</td>
               </tr>
               <tr>
@@ -302,7 +290,7 @@ function App() {
               </tr>
               <tr>
                 <td>Gesamtkosten</td>
-                <td>{eur(variant.bungalowCost)} + {eur(costs.vpTotal)} + {eur(costs.rapTotal)}</td>
+                <td>{eur(plan.bungalowCost)} + {eur(costs.vpTotal)} + {eur(costs.rapTotal)}</td>
                 <td>{eur(costs.total)}</td>
               </tr>
             </tbody>
@@ -355,7 +343,7 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {variant.rooms.map((room) => (
+              {plan.rooms.map((room) => (
                 <tr key={room.room}>
                   <td>{room.room}</td>
                   <td>{room.type}</td>

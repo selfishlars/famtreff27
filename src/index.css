@@ -41,7 +41,7 @@ body {
 
 .hero-card,
 .meta-card,
-.variant-card {
+.plan-card {
   width: 100%;
   background: var(--color-white);
   border: 1px solid rgba(43, 136, 17, 0.18);
@@ -72,7 +72,7 @@ body {
 }
 
 .meta-card h2,
-.variant-card h2 {
+.plan-card h2 {
   color: var(--color-green-dark);
   margin-bottom: 0.6rem;
 }
@@ -100,7 +100,7 @@ body {
   gap: 0.25rem;
 }
 
-.variant-header {
+.plan-header {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -108,7 +108,7 @@ body {
   margin-bottom: 0.75rem;
 }
 
-.variant-totals {
+.plan-totals {
   background: rgba(171, 183, 227, 0.12);
   border: 1px solid rgba(171, 183, 227, 0.45);
   border-radius: 12px;
@@ -116,7 +116,7 @@ body {
   min-width: 220px;
 }
 
-.variant-totals .sum {
+.plan-totals .sum {
   font-weight: 700;
   color: var(--color-green-dark);
 }

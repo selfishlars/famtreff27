@@ -7,9 +7,7 @@ export type RoomPlan = {
   occupancy: string
 }
 
-export type VariantPlan = {
-  id: string
-  title: string
+export type AccommodationPlan = {
   housingSetup: string
   categoryLabel: string
   accessibility: string
@@ -59,15 +57,13 @@ export const FAMILY_COSTS: FamilyCost[] = [
   { family: 'Familie Sullivan W/S + Kind 0-3', adults: 2, children: 0, babies: 1 },
 ]
 
-export const FEUERKUPPE_VARIANTS: VariantPlan[] = [
-  {
-    id: '4',
-    title: 'Variante 4',
-    housingSetup: '3 x Kategorie Ia (12)',
-    categoryLabel: 'Kat. Ia',
-    accessibility: 'Barrierefrei orientiert (nur Ia-Haeuser)',
-    bungalowCost: 2754,
-    rooms: [
+// Gebuchte Unterkunft (Realstand laut Vertrag 2027): 3x Bungalow Kat. Ia, 9 Zimmer.
+export const FEUERKUPPE_PLAN: AccommodationPlan = {
+  housingSetup: '3 x Kategorie Ia (12)',
+  categoryLabel: 'Kat. Ia',
+  accessibility: 'Barrierefrei orientiert (nur Ia-Haeuser)',
+  bungalowCost: 2754,
+  rooms: [
       { room: 'Ia-Haus 1 - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior ElectricalResistance K und K, Junior ElectricalResistance S und E, 2 Betten frei' },
       { room: 'Ia-Haus 1 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero L und K, Junior Molinero L und S' },
       { room: 'Ia-Haus 1 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero E und J' },
@@ -77,6 +73,5 @@ export const FEUERKUPPE_VARIANTS: VariantPlan[] = [
       { room: 'Ia-Haus 3 - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 0, bathroom: 'Eigenes DU/WC', occupancy: 'frei' },
       { room: 'Ia-Haus 3 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 3, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sullivan W und S, Junior Sullivan C, 1 Bett frei' },
       { room: 'Ia-Haus 3 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sonntagskind T und P' },
-    ],
-  },
-]
+  ],
+}
