@@ -29,8 +29,8 @@ Stand: 2026-08-01
 - Technisch: Gewichtung betrifft **nur** die Bungalow-Umlage (`ADULT_ALLOCATION_WEIGHT=1`,
   `CHILD_ALLOCATION_WEIGHT=0.5` in `feuerkuppeData.ts`, verwendet in `getWeightedPlanCosts`);
   VP und RAP werden immer personengenau addiert.
-- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1722 + RAP 198 = **4.674,00 €**.
-  (Junior Blizzard N sagte ab -> nur noch 15 Erwachsene / 22 Personen; Bungalowpreis bleibt fix.)
+- **Gesamtkosten** dieses Modells: Bungalow 2754 + VP 1689 + RAP 198 = **4.641,00 €**.
+  (15 Erwachsene / 5 Kinder 3+ / 2 Kinder 0-3 = 22 Personen; Bungalowpreis bleibt fix.)
 
 ## Aktueller Produktzustand
 
@@ -56,8 +56,9 @@ Stand: 2026-08-01
 ## Fachlogik / Datenmodell
 
 - `src/data/feuerkuppeData.ts`:
-  - Personenzahlen: `ADULT_COUNT=15`, `CHILD_COUNT=6`, `BABY_COUNT=1` (22 gesamt; Junior Blizzard N
-    hat abgesagt, 2026-08-01).
+  - Personenzahlen: `ADULT_COUNT=15`, `CHILD_COUNT=5`, `BABY_COUNT=2` (22 gesamt; Junior Blizzard N
+    hat abgesagt, 2026-08-01). `BABY_COUNT=2`: ein zweites Kind faellt beim VP-Tarif in die Gruppe
+    0-3 (naehere personenbezogene Angaben bewusst NICHT dokumentiert).
   - Umlage-Gewichte: `ADULT_ALLOCATION_WEIGHT=1`, `CHILD_ALLOCATION_WEIGHT=0.5` (nur Bungalow-Umlage).
   - VP-Kosten pro Person: Erwachsene 85,50 €, Kinder 3+ 67,50 €, Kinder 0-3 34,50 €.
     BESTAETIGT durch korrigierten Vertrag `Vertrag_Familien_2027.pdf` (01.08.2026): Vollpension

@@ -23,8 +23,8 @@ export type FamilyCost = {
 }
 
 export const ADULT_COUNT = 15
-export const CHILD_COUNT = 6
-export const BABY_COUNT = 1
+export const CHILD_COUNT = 5
+export const BABY_COUNT = 2
 // Vereinbarte Kostenaufteilung (Familien-Planungsabsprache): Erwachsene tragen die
 // Unterkunfts-Umlage mit Gewicht 1, Kinder (unabhaengig vom Alter, auch 0-3) mit 0,5.
 // Betrifft NUR die Bungalow-Umlage; VP und RAP werden immer personengenau abgerechnet.
@@ -51,7 +51,7 @@ export const FAMILY_COSTS: FamilyCost[] = [
   { family: 'Senior Blizzard J/U', adults: 2, children: 0, babies: 0 },
   { family: 'Junior Blizzard J', adults: 1, children: 0, babies: 0 },
   { family: 'Familie Molinero L/K + Kinder', adults: 2, children: 2, babies: 0 },
-  { family: 'Familie Windymillymill B/K + Kinder', adults: 2, children: 2, babies: 0 },
+  { family: 'Familie Windymillymill B/K + Kinder', adults: 2, children: 1, babies: 1 },
   { family: 'Senior Sonntagskind T/P', adults: 2, children: 0, babies: 0 },
   { family: 'Familie ElectricalResistance K/K + Kinder', adults: 2, children: 2, babies: 0 },
   { family: 'Familie Sullivan W/S + Kind 0-3', adults: 2, children: 0, babies: 1 },
