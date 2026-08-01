@@ -5,6 +5,8 @@ import {
   CHILD_ALLOCATION_WEIGHT,
   CHILD_COUNT,
   FAMILY_COSTS,
+  RAP_PER_PERSON,
+  RAP_TOTAL,
   type RoomPlan,
   type VariantPlan,
   VP_ADULT,
@@ -49,7 +51,8 @@ export function getWeightedVariantCosts(
   const adultPrice = adultOvernight + VP_ADULT
   const childPrice = childOvernight + VP_CHILD
   const child03Price = childOvernight + VP_BABY
-  const total = bungalowCost + vpTotal
+  const rapTotal = RAP_TOTAL
+  const total = bungalowCost + vpTotal + rapTotal
 
   const familyRows = FAMILY_COSTS.map((family) => {
     const overnightUnits =
@@ -61,13 +64,17 @@ export function getWeightedVariantCosts(
       family.children * VP_CHILD +
       family.babies * VP_BABY
 
-    const familyTotal =
-      overnightUnits * overnightSharePerUnit +
-      familyVp
+    const familyPersons = family.adults + family.children + family.babies
+    const familyRap = familyPersons * RAP_PER_PERSON
+
+    const familyLodging = overnightUnits * overnightSharePerUnit
+    const familyTotal = familyLodging + familyVp + familyRap
 
     return {
       ...family,
       vp: familyVp,
+      rap: familyRap,
+      lodging: familyLodging,
       total: familyTotal,
     }
   })
@@ -86,6 +93,8 @@ export function getWeightedVariantCosts(
       adultPrice,
       childPrice,
     child03Price,
+    rapPerPerson: RAP_PER_PERSON,
+    rapTotal,
     total,
       familyRows,
     }

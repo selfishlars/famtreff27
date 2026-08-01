@@ -3,6 +3,11 @@ import {
   BABY_COUNT,
   CHILD_COUNT,
   FEUERKUPPE_VARIANTS,
+  NIGHTS,
+  RAP_PER_PERSON,
+  RAP_PER_PERSON_PER_NIGHT,
+  RAP_TOTAL,
+  TOTAL_PERSONS,
   VP_ADULT,
   VP_BABY,
   VP_CHILD,
@@ -197,6 +202,50 @@ function App() {
           Formulierung "gesamte Gruppe inklusive Begleitpersonen". Im Zweifel vorab beim KiEZ
           schriftlich bestätigen lassen.
         </p>
+
+        <div className="table-wrap">
+          <table>
+            <caption>RAP-Kosten & Berechnung</caption>
+            <thead>
+              <tr>
+                <th>Baustein</th>
+                <th>Berechnung</th>
+                <th>Wert</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pauschale je Person und Nacht</td>
+                <td>Fixwert laut RAP-Dokument</td>
+                <td>{eur(RAP_PER_PERSON_PER_NIGHT)}</td>
+              </tr>
+              <tr>
+                <td>Übernachtungen</td>
+                <td>Anreise 06.05. → Abreise 09.05.2027</td>
+                <td>{NIGHTS}</td>
+              </tr>
+              <tr>
+                <td>RAP je Person (gesamter Aufenthalt)</td>
+                <td>{eur(RAP_PER_PERSON_PER_NIGHT)} × {NIGHTS}</td>
+                <td>{eur(RAP_PER_PERSON)}</td>
+              </tr>
+              <tr>
+                <td>Personen gesamt (inkl. Kinder/Babys)</td>
+                <td>{ADULT_COUNT} Erw. + {CHILD_COUNT} Kinder (3+) + {BABY_COUNT} Kind (0-3)</td>
+                <td>{TOTAL_PERSONS}</td>
+              </tr>
+              <tr>
+                <td>RAP gesamt (ganze Gruppe)</td>
+                <td>{TOTAL_PERSONS} × {eur(RAP_PER_PERSON)}</td>
+                <td>{eur(RAP_TOTAL)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="muted">
+          Jede Familienpartei trägt ihren RAP-Anteil selbst: Personenzahl der Familie × {eur(RAP_PER_PERSON)}.
+          Der Betrag ist in den Kostentabellen je Familie enthalten.
+        </p>
       </section>
 
       {scenarios.map((scenario) => {
@@ -230,7 +279,8 @@ function App() {
               <div className="variant-totals">
                 <p>Bungalows: {eur(variant.bungalowCost)}</p>
                 <p>VP gesamt: {eur(vpReference.vpTotal)}</p>
-                <p className="sum">Gesamt: {eur(variant.bungalowCost + vpReference.vpTotal)}</p>
+                <p>RAP gesamt: {eur(RAP_TOTAL)}</p>
+                <p className="sum">Gesamt: {eur(variant.bungalowCost + vpReference.vpTotal + RAP_TOTAL)}</p>
               </div>
             </header>
 
@@ -304,8 +354,13 @@ function App() {
                         <td>{eur(personCosts.vpTotal)}</td>
                       </tr>
                       <tr>
+                        <td>RAP gesamt</td>
+                        <td>{TOTAL_PERSONS} × {eur(personCosts.rapPerPerson)}</td>
+                        <td>{eur(personCosts.rapTotal)}</td>
+                      </tr>
+                      <tr>
                         <td>Gesamtkosten Variante</td>
-                        <td>{eur(variant.bungalowCost)} + {eur(personCosts.vpTotal)}</td>
+                        <td>{eur(variant.bungalowCost)} + {eur(personCosts.vpTotal)} + {eur(personCosts.rapTotal)}</td>
                         <td>{eur(personCosts.total)}</td>
                       </tr>
                     </tbody>
@@ -323,6 +378,7 @@ function App() {
                         <th>Kind 0-3</th>
                         <th>VP-Anteil</th>
                         <th>Unterkunftskosten</th>
+                        <th>RAP-Anteil</th>
                         <th>Gesamt</th>
                       </tr>
                     </thead>
@@ -334,7 +390,8 @@ function App() {
                           <td>{family.children}</td>
                           <td>{family.babies}</td>
                           <td>{eur(family.vp)}</td>
-                          <td>{eur(family.total - family.vp)}</td>
+                          <td>{eur(family.lodging)}</td>
+                          <td>{eur(family.rap)}</td>
                           <td>{eur(family.total)}</td>
                         </tr>
                       ))}
@@ -369,8 +426,8 @@ function App() {
                       </tr>
                       <tr>
                         <td>Gesamtkosten Variante</td>
-                        <td>{eur(variant.bungalowCost)} + {eur(vpReference.vpTotal)}</td>
-                        <td>{eur(variant.bungalowCost + vpReference.vpTotal)}</td>
+                        <td>{eur(variant.bungalowCost)} + {eur(vpReference.vpTotal)} + {eur(RAP_TOTAL)}</td>
+                        <td>{eur(variant.bungalowCost + vpReference.vpTotal + RAP_TOTAL)}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -434,8 +491,8 @@ function App() {
                       </tr>
                       <tr>
                         <td>Gesamtkosten Variante</td>
-                        <td>{eur(variant.bungalowCost)} + {eur(vpReference.vpTotal)}</td>
-                        <td>{eur(variant.bungalowCost + vpReference.vpTotal)}</td>
+                        <td>{eur(variant.bungalowCost)} + {eur(vpReference.vpTotal)} + {eur(RAP_TOTAL)}</td>
+                        <td>{eur(variant.bungalowCost + vpReference.vpTotal + RAP_TOTAL)}</td>
                       </tr>
                     </tbody>
                   </table>

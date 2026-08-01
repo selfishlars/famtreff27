@@ -37,6 +37,14 @@ export const VP_ADULT = 85.5
 export const VP_CHILD = 67.5
 export const VP_BABY = 34.5
 
+// Reiseausfallpauschale (RAP): 3,00 EUR pro Person und pro Uebernachtung,
+// gilt fuer die gesamte Gruppe inkl. Begleitpersonen (auch Kinder/Babys).
+export const NIGHTS = 3
+export const TOTAL_PERSONS = ADULT_COUNT + CHILD_COUNT + BABY_COUNT
+export const RAP_PER_PERSON_PER_NIGHT = 3
+export const RAP_PER_PERSON = RAP_PER_PERSON_PER_NIGHT * NIGHTS
+export const RAP_TOTAL = TOTAL_PERSONS * RAP_PER_PERSON
+
 export const FAMILY_COSTS: FamilyCost[] = [
   { family: 'Senior Molinero E/J', adults: 2, children: 0, babies: 0 },
   { family: 'Senior Blizzard J/U', adults: 2, children: 0, babies: 0 },
@@ -49,66 +57,6 @@ export const FAMILY_COSTS: FamilyCost[] = [
 ]
 
 export const FEUERKUPPE_VARIANTS: VariantPlan[] = [
-  {
-    id: '1',
-    title: 'Variante 1',
-    housingSetup: '1 x Kategorie III',
-    categoryLabel: 'Kat. III',
-    accessibility: 'Teilweise barrierefrei (eigener Bereich vorhanden)',
-    bungalowCost: 1428,
-    rooms: [
-      { room: 'Zimmer 1', type: '5-Bett-Zimmer', beds: 5, occupiedBeds: 4, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Senior ElectricalResistance K und K, Junior ElectricalResistance S und E, 1 Bett frei' },
-      { room: 'Zimmer 2', type: '3-Bett-Zimmer', beds: 3, occupiedBeds: 3, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Senior Windymillymill B und K, Junior Windymillymill L' },
-      { room: 'Zimmer 3', type: '3-Bett-Zimmer', beds: 3, occupiedBeds: 3, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Junior Windymillymill M, Junior Molinero L und S' },
-      { room: 'Zimmer 4', type: '3-Bett-Zimmer', beds: 3, occupiedBeds: 2, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Senior Molinero L und K, 1 Bett frei' },
-      { room: 'Zimmer 5', type: '3-Bett-Zimmer', beds: 3, occupiedBeds: 3, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Senior Sullivan W und S, Junior Sullivan C' },
-      { room: 'Zimmer 6', type: '3-Bett-Zimmer', beds: 3, occupiedBeds: 2, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Senior Sonntagskind T und P, 1 Bett frei' },
-      { room: 'Zimmer 7', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Senior Blizzard J und U' },
-      { room: 'Zimmer 8', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'Junior Blizzard J und N' },
-      { room: 'Zimmer 9', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 0, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'frei' },
-      { room: 'Zimmer 10', type: 'Einzelzimmer', beds: 1, occupiedBeds: 0, bathroom: 'Gemeinschaftlich (DU/WC)', occupancy: 'frei' },
-      { room: 'Zimmer 11', type: '2-Bett-Zimmer (barrierefreier Bereich)', beds: 2, occupiedBeds: 1, bathroom: 'Sanitaer im barrierefreien Bereich (DU/WC)', occupancy: 'Senior Molinero E, 1 Bett frei' },
-      { room: 'Zimmer 12', type: 'Einzelzimmer (barrierefreier Bereich)', beds: 1, occupiedBeds: 1, bathroom: 'Sanitaer im barrierefreien Bereich (DU/WC)', occupancy: 'Senior Molinero J' },
-    ],
-  },
-  {
-    id: '2',
-    title: 'Variante 2',
-    housingSetup: '2 x Kategorie I + 1 x Kategorie II',
-    categoryLabel: 'Kat. I/II',
-    accessibility: 'Nicht barrierefrei (protokolliert)',
-    bungalowCost: 2115,
-    rooms: [
-      { room: 'Haus A (Kat. I) - Zimmer 1', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior ElectricalResistance K und K, Junior ElectricalResistance S und E' },
-      { room: 'Haus A (Kat. I) - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero L und K, Junior Molinero L und S' },
-      { room: 'Haus A (Kat. I) - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Blizzard J und U' },
-      { room: 'Haus B (Kat. II) - Zimmer 1', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 4, bathroom: 'Gemeinsames DU/WC mit Zimmer 2', occupancy: 'Senior Windymillymill B und K, Junior Windymillymill M und L' },
-      { room: 'Haus B (Kat. II) - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 3, bathroom: 'Gemeinsames DU/WC mit Zimmer 1', occupancy: 'Senior Sullivan W und S, Junior Sullivan C, 1 Bett frei' },
-      { room: 'Haus B (Kat. II) - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Junior Blizzard J und N' },
-      { room: 'Haus C (Kat. I) - Zimmer 1', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sonntagskind T und P, 2 Betten frei' },
-      { room: 'Haus C (Kat. I) - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 0, bathroom: 'Eigenes DU/WC', occupancy: 'frei' },
-      { room: 'Haus C (Kat. I) - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero E und J' },
-    ],
-  },
-  {
-    id: '3',
-    title: 'Variante 3',
-    housingSetup: '1 x Kategorie Ia (12) + 1 x Kategorie I + 1 x Kategorie II',
-    categoryLabel: 'Kat. Ia + I/II',
-    accessibility: 'Teilweise barrierefrei (Ia-Anteil vorhanden)',
-    bungalowCost: 2328,
-    rooms: [
-      { room: 'Ia-Haus - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior ElectricalResistance K und K, Junior ElectricalResistance S und E, 2 Betten frei' },
-      { room: 'Ia-Haus - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Windymillymill B und K, Junior Windymillymill M und L' },
-      { room: 'Ia-Haus - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero E und J' },
-      { room: 'Haus A (Kat. II) - Zimmer 1', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 4, bathroom: 'Gemeinsames DU/WC mit Zimmer 2', occupancy: 'Senior Molinero L und K, Junior Molinero L und S' },
-      { room: 'Haus A (Kat. II) - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Gemeinsames DU/WC mit Zimmer 1', occupancy: 'Senior Sonntagskind T und P, 2 Betten frei' },
-      { room: 'Haus A (Kat. II) - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Blizzard J und U' },
-      { room: 'Haus B (Kat. I) - Zimmer 1', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Junior Blizzard J und N, 2 Betten frei' },
-      { room: 'Haus B (Kat. I) - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 3, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sullivan W und S, Junior Sullivan C, 1 Bett frei' },
-      { room: 'Haus B (Kat. I) - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 0, bathroom: 'Eigenes DU/WC', occupancy: 'frei' },
-    ],
-  },
   {
     id: '4',
     title: 'Variante 4',
