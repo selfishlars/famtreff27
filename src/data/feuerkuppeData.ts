@@ -66,12 +66,12 @@ export const FEUERKUPPE_PLAN: AccommodationPlan = {
   rooms: [
       { room: 'Ia-Haus 1 - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior ElectricalResistance K und K, Junior ElectricalResistance S und E, 2 Betten frei' },
       { room: 'Ia-Haus 1 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sonntagskind T und P, 2 Betten frei' },
-      { room: 'Ia-Haus 1 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero E und J' },
+      { room: 'Ia-Haus 1 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 1, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero J, 1 Bett frei' },
       { room: 'Ia-Haus 2 - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Windymillymill B und K, Junior Windymillymill M und L, 2 Betten frei' },
-      { room: 'Ia-Haus 2 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Blizzard J und U, 2 Betten frei' },
-      { room: 'Ia-Haus 2 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Junior Blizzard J und N' },
+      { room: 'Ia-Haus 2 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 3, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sullivan W und S, Junior Sullivan C, 1 Bett frei' },
+      { room: 'Ia-Haus 2 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 1, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero E, 1 Bett frei' },
       { room: 'Ia-Haus 3 - Zimmer 1', type: '6-Bett-Zimmer', beds: 6, occupiedBeds: 4, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Molinero L und K, Junior Molinero L und S, 2 Betten frei' },
-      { room: 'Ia-Haus 3 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 3, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Sullivan W und S, Junior Sullivan C, 1 Bett frei' },
-      { room: 'Ia-Haus 3 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 0, bathroom: 'Eigenes DU/WC', occupancy: 'frei' },
+      { room: 'Ia-Haus 3 - Zimmer 2', type: '4-Bett-Zimmer', beds: 4, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Senior Blizzard J und U, 2 Betten frei' },
+      { room: 'Ia-Haus 3 - Zimmer 3', type: '2-Bett-Zimmer', beds: 2, occupiedBeds: 2, bathroom: 'Eigenes DU/WC', occupancy: 'Junior Blizzard J und N' },
   ],
 }
