@@ -59,6 +59,31 @@ const DOCUMENT_SUMMARIES: DocumentSummary[] = [
   },
 ]
 
+// Feste Farbcodierung der Familiennamen (immer fett), ueberall wo Namen vorkommen.
+const NAME_COLORS: Record<string, string> = {
+  ElectricalResistance: '#9333ea', // lila
+  Molinero: '#16a34a', // gruen
+  Sullivan: '#c2410c', // dunkelorange
+  Windymillymill: '#2563eb', // blau
+  Blizzard: '#6b7280', // grau
+  Sonntagskind: '#6b8e5a', // salbei
+}
+
+const NAME_PATTERN = new RegExp(`(${Object.keys(NAME_COLORS).join('|')})`, 'g')
+
+function highlightNames(text: string) {
+  return text.split(NAME_PATTERN).map((part, index) => {
+    const color = NAME_COLORS[part]
+    return color ? (
+      <strong key={index} style={{ color }}>
+        {part}
+      </strong>
+    ) : (
+      <span key={index}>{part}</span>
+    )
+  })
+}
+
 function App() {
   const plan = FEUERKUPPE_PLAN
   const costs = getPlanCosts(plan.bungalowCost)
@@ -315,7 +340,7 @@ function App() {
             <tbody>
               {costs.familyRows.map((family) => (
                 <tr key={family.family}>
-                  <td>{family.family}</td>
+                  <td>{highlightNames(family.family)}</td>
                   <td>{family.adults}</td>
                   <td>{family.children}</td>
                   <td>{family.babies}</td>
@@ -350,7 +375,7 @@ function App() {
                   <td>{room.beds}</td>
                   <td>{room.occupiedBeds}</td>
                   <td>{room.bathroom}</td>
-                  <td>{room.occupancy}</td>
+                  <td>{highlightNames(room.occupancy)}</td>
                 </tr>
               ))}
             </tbody>
