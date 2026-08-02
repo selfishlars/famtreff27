@@ -234,7 +234,7 @@ function App() {
       <section className="plan-card">
         <header className="plan-header">
           <div>
-            <h2>Vereinbarte Kostenaufteilung</h2>
+            <h2>Kostenaufteilung</h2>
             <p className="muted">
               {plan.housingSetup} · {plan.categoryLabel}
             </p>

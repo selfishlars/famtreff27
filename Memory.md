@@ -9,8 +9,8 @@ Stand: 2026-08-01
 
 ## Kurzstatus
 
-- Die Web-App ist aktiv und zeigt **ein** verbindliches Pricing-Modell "Vereinbarte
-  Kostenaufteilung" fuer die eine gebuchte Unterkunft ("Familientreffen 2027", Feuerkuppe), inkl.
+- Die Web-App ist aktiv und zeigt **ein** verbindliches Pricing-Modell (Abschnitt
+  "Kostenaufteilung") fuer die eine gebuchte Unterkunft ("Familientreffen 2027", Feuerkuppe), inkl.
   RAP je Familie.
 - Verlauf 2026-08-01: RAP erfasst + alte Varianten 1-3 entfernt (Commit `88b4fae`), auf das
   vereinbarte Gewichtungsmodell (Erw. 1 / Kinder 0,5) konsolidiert, dann die "Varianten"-
@@ -41,8 +41,8 @@ Stand: 2026-08-01
 
 ## Aktueller Produktzustand
 
-- Startseite (`src/App.tsx`) zeigt **ein** verbindliches Pricing-Modell "Vereinbarte
-  Kostenaufteilung" (kein Szenario-Vergleich mehr). Die frueheren 5 Szenarien (4_1/4_2/4_3 sowie
+- Startseite (`src/App.tsx`) zeigt **ein** verbindliches Pricing-Modell (Abschnitt
+  "Kostenaufteilung", kein Szenario-Vergleich mehr). Die frueheren 5 Szenarien (4_1/4_2/4_3 sowie
   room-linear 5_0 und room-beds-house 5_1) wurden am 2026-08-01 konsolidiert, nachdem die Familie
   sich auf die Gewichtung Erw. 1 / Kinder 0,5 geeinigt hat.
 - Sektionen: Planungsgrundlage (Personen, VP-Tarife, Gewichtungs-Uebersicht), Dokumente,
